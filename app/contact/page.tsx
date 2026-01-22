@@ -143,7 +143,7 @@ export default function ContactPage() {
       </div>
 
       {/* Crowd Canvas Section */}
-      <div className="w-full h-[600px] mt-20 relative border-t border-black/5 overflow-hidden">
+      <div className="w-full h-[400px] relative overflow-hidden mt-10">
         <Skiper39 />
       </div>
 
