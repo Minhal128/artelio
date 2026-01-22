@@ -69,7 +69,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative flex flex-col items-center text-center pt-16 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
+    <section id="home" className="relative flex flex-col items-center text-center pt-16 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
       {/* Dynamic Background Accents */}
       <motion.div
         variants={splashVariants}

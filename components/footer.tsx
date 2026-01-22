@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="w-full bg-background pt-20">
+    <footer id="contact" className="w-full bg-background pt-20">
       <div className="max-w-7xl mx-auto px-8">
         {/* Banner Card */}
         <div className="relative w-full h-[450px] rounded-[4rem] overflow-hidden mb-24 shadow-2xl">

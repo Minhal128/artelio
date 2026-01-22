@@ -68,7 +68,7 @@ const Gallery = () => {
 
 
   return (
-    <section className="py-24 bg-[#f5f4f3]">
+    <section id="gallery" className="py-24 bg-[#f5f4f3]">
       <div className="max-w-[1400px] mx-auto px-6">
         <div className="flex flex-col items-center mb-16 text-center">
           <motion.div
