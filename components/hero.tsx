@@ -102,14 +102,14 @@ export function Hero() {
 
             <motion.h1 
               variants={itemVariants} 
-              className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl"
+              className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl text-foreground"
             >
               Defining the Future of Fine Art with{" "}
               <ScrambledText
                 radius={100}
                 duration={1.2}
                 speed={0.5}
-                scrambleChars=".:"
+                scrambleChars=".:*#$@"
                 className="text-primary"
               >
                 Artelio
