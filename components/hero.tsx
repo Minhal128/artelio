@@ -30,14 +30,14 @@ export function Hero() {
     },
   ]
 
-  const galleryItems = [
-    { image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop", text: "Classical" },
-    { image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=800&auto=format&fit=crop", text: "Abstract" },
-    { image: "https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=800&auto=format&fit=crop", text: "Modern" },
-    { image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=800&auto=format&fit=crop", text: "Sculpture" },
-    { image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=800&auto=format&fit=crop", text: "Renaissance" },
-    { image: "https://images.unsplash.com/photo-1576769267415-9642010aa962?q=80&w=800&auto=format&fit=crop", text: "Expression" },
-  ]
+    const galleryItems = [
+      { image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=800&auto=format&fit=crop", text: "Oil Painting" },
+      { image: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop", text: "Abstract Art" },
+      { image: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=800&auto=format&fit=crop", text: "Exhibition" },
+      { image: "https://images.unsplash.com/photo-1573167101552-393ed8525b68?q=80&w=800&auto=format&fit=crop", text: "Contemporary" },
+      { image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=800&auto=format&fit=crop", text: "Renaissance" },
+      { image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop", text: "Classical" },
+    ]
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -117,25 +117,15 @@ export function Hero() {
 
         <motion.p
           variants={itemVariants}
-          className="text-muted-foreground text-base md:text-lg max-w-3xl mb-8 leading-relaxed font-light"
+          className="text-muted-foreground text-base md:text-lg max-w-3xl mb-4 leading-relaxed font-light"
         >
           Where timeless masterpieces meet contemporary vision. Discover high-end art collections curated for the modern connoisseur.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-12">
-          <Button className="rounded-full h-12 px-8 text-base bg-primary hover:bg-primary/90 transition-all hover:scale-105 group">
-            Explore Gallery
-            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Button>
-          <Button variant="outline" className="rounded-full h-12 px-8 text-base border-primary/20 hover:bg-primary/5 transition-all">
-            Our Story
-          </Button>
-        </motion.div>
-
         {/* Circular Gallery Integration */}
         <motion.div 
           variants={itemVariants}
-          className="w-full h-[500px] relative mb-24"
+          className="w-full h-[600px] relative mb-16"
         >
           <CircularGallery 
             items={galleryItems}
