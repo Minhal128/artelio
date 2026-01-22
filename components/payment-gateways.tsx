@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -8,26 +8,26 @@ type CharacterProps = {
   char: string;
   index: number;
   centerIndex: number;
-  scrollYProgress: any;
+  progress: any;
 };
 
 const CharacterV1 = ({
   char,
   index,
   centerIndex,
-  scrollYProgress,
+  progress,
 }: CharacterProps) => {
   const isSpace = char === " ";
   const distanceFromCenter = index - centerIndex;
 
   const x = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    progress,
+    [0, 0.45],
     [distanceFromCenter * 50, 0],
   );
   const rotateX = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    progress,
+    [0, 0.45],
     [distanceFromCenter * 50, 0],
   );
 
@@ -48,28 +48,28 @@ const CharacterV3 = ({
   char,
   index,
   centerIndex,
-  scrollYProgress,
+  progress,
 }: CharacterProps) => {
   const isSpace = char === " ";
   const distanceFromCenter = index - centerIndex;
 
   const x = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    progress,
+    [0, 0.45],
     [distanceFromCenter * 90, 0],
   );
   const rotate = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    progress,
+    [0, 0.45],
     [distanceFromCenter * 50, 0],
   );
 
   const y = useTransform(
-    scrollYProgress,
-    [0, 0.5],
+    progress,
+    [0, 0.45],
     [-Math.abs(distanceFromCenter) * 20, 0],
   );
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.75, 1]);
+  const scale = useTransform(progress, [0, 0.45], [0.75, 1]);
 
   return (
     <motion.img
@@ -89,13 +89,16 @@ const CharacterV3 = ({
 
 export function PaymentGateways() {
   const targetRef = useRef<HTMLDivElement | null>(null);
-  const targetRef2 = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
+    offset: ["start end", "end start"],
   });
-  const { scrollYProgress: scrollYProgress2 } = useScroll({
-    target: targetRef2,
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
   });
 
   const text = "Seamless Checkout";
@@ -109,13 +112,11 @@ export function PaymentGateways() {
   const iconCenterIndex = Math.floor(paymentIcons.length / 2);
 
   return (
-    <section className="w-full bg-[#fdfaf3]">
-      <div
-        ref={targetRef}
-        className="relative box-border flex h-[100vh] items-center justify-center gap-[2vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
-      >
+    <section ref={targetRef} className="w-full bg-[#fdfaf3] relative">
+      <div className="flex flex-col items-center justify-center min-h-[160vh] py-[10vh] overflow-hidden">
+        {/* Heading Section */}
         <div
-          className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black"
+          className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black sticky top-[30vh]"
           style={{
             perspective: "1000px",
           }}
@@ -126,37 +127,37 @@ export function PaymentGateways() {
               char={char}
               index={index}
               centerIndex={centerIndex}
-              scrollYProgress={scrollYProgress}
+              progress={smoothProgress}
             />
           ))}
         </div>
-      </div>
-      <div
-        ref={targetRef2}
-        className="relative -mt-[40vh] box-border flex h-[100vh] flex-col items-center justify-center gap-[4vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
-      >
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <Bracket className="h-10 text-[#b3633d]" />
-          <span className="font-serif text-3xl font-light text-black/80 italic">
-            Secure & Fast Payments
-          </span>
-          <Bracket className="h-10 scale-x-[-1] text-[#b3633d]" />
-        </div>
+
+        {/* Icons Section - Brought closer */}
         <div
-          className="w-full max-w-4xl flex items-center justify-center text-center"
-          style={{
-            perspective: "1000px",
-          }}
+          className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[15vh] z-10"
         >
-          {paymentIcons.map((char, index) => (
-            <CharacterV3
-              key={index}
-              char={char}
-              index={index}
-              centerIndex={iconCenterIndex}
-              scrollYProgress={scrollYProgress2}
-            />
-          ))}
+          <div className="flex items-center justify-center gap-4 mb-10 opacity-80">
+            <Bracket className="h-8 text-[#b3633d]" />
+            <span className="font-serif text-2xl font-light text-black/80 italic">
+              Secure & Fast Payments
+            </span>
+            <Bracket className="h-8 scale-x-[-1] text-[#b3633d]" />
+          </div>
+          
+          <div 
+            className="flex items-center justify-center"
+            style={{ perspective: "1000px" }}
+          >
+            {paymentIcons.map((char, index) => (
+              <CharacterV3
+                key={index}
+                char={char}
+                index={index}
+                centerIndex={iconCenterIndex}
+                progress={smoothProgress}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
