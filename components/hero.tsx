@@ -7,23 +7,23 @@ import Image from "next/image"
 export function Hero() {
   const images = [
     {
-      src: "/people-celebrating-art.jpg",
-      alt: "People celebrating art",
+      src: "https://images.unsplash.com/photo-1493335773346-34a16ed422c3?q=80&w=2070&auto=format&fit=crop",
+      alt: "Art gallery exhibition",
       className: "h-[300px] md:h-[400px]",
     },
     {
-      src: "/jaguar-in-jungle.jpg",
-      alt: "Jaguar in jungle illustration",
+      src: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1890&auto=format&fit=crop",
+      alt: "Vibrant abstract painting",
       className: "h-[200px] md:h-[250px] mt-auto",
     },
     {
-      src: "/roller-skating-summer.jpg",
-      alt: "People roller skating on a sunny day",
+      src: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1887&auto=format&fit=crop",
+      alt: "Classic sculpture in museum",
       className: "h-[200px] md:h-[250px] mt-auto",
     },
     {
-      src: "/landscape-with-field-and-dome.jpg",
-      alt: "Stylized landscape with field and glass dome",
+      src: "https://images.unsplash.com/photo-1571115764593-5334d93088b0?q=80&w=2070&auto=format&fit=crop",
+      alt: "Contemporary art piece",
       className: "h-[300px] md:h-[400px]",
     },
   ]
@@ -155,20 +155,31 @@ export function Hero() {
 
 export function LogoMarquee() {
   const items = [
-    { logo: "/logos/application.svg", alt: "application" },
-    { logo: "/logos/business.svg", alt: "business" },
-    { logo: "/logos/company.svg", alt: "company" },
-    { logo: "/logos/startup.svg", alt: "startup" },
-    { logo: "/logos/venture.svg", alt: "venture" },
-    { logo: "/logos/agency.svg", alt: "agency" },
+    { name: "application", logo: "/logos/application.svg" },
+    { name: "business", logo: "/logos/business.svg" },
+    { name: "company", logo: "/logos/company.svg" },
+    { name: "startup", logo: "/logos/startup.svg" },
+    { name: "venture", logo: "/logos/venture.svg" },
+    { name: "agency", logo: "/logos/agency.svg" },
   ]
 
   return (
-    <div className="overflow-hidden w-full">
-      <div className="relative overflow-hidden bg-black py-16 -rotate-[5deg] mt-32 mb-16 min-w-[120vw] -mx-[10vw] left-0">
-        <div className="flex items-center gap-16 animate-marquee whitespace-nowrap">
-          {[...items, ...items, ...items, ...items].map((item, index) => (
-            <img key={index} src={item.logo || "/placeholder.svg"} alt={item.alt} className="h-12 w-auto brightness-0 invert" />
+    <div className="overflow-hidden w-full select-none">
+      <div className="relative overflow-hidden bg-[#1A1410] py-12 -rotate-2 mt-16 mb-16 min-w-[150vw] -mx-[25vw] left-0 border-y border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+        <div className="flex items-center gap-24 animate-marquee whitespace-nowrap hover:[animation-play-state:paused] cursor-pointer">
+          {[...items, ...items, ...items, ...items, ...items, ...items].map((item, index) => (
+            <div key={index} className="flex items-center gap-4 group transition-all duration-300">
+              <div className="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
+                <img 
+                  src={item.logo || "/placeholder.svg"} 
+                  alt={item.name} 
+                  className="h-8 w-auto brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity" 
+                />
+              </div>
+              <span className="text-white/60 font-serif italic text-2xl uppercase tracking-[0.2em] group-hover:text-white transition-colors">
+                {item.name}
+              </span>
+            </div>
           ))}
         </div>
       </div>
