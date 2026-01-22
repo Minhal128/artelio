@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { CircularGallery } from "./CircularGallery"
-import ScrambledText from "./ScrambledText"
+import Shuffle from "./ui/Shuffle"
 
 export function Hero() {
   const images = [
@@ -105,13 +105,24 @@ export function Hero() {
               className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl text-foreground"
             >
               Defining the Future of Fine Art with{" "}
-                <ScrambledText
-                  radius={120}
-                  scrambleChars=".:*#$@"
+                <Shuffle
+                  text="Artelio"
+                  shuffleDirection="right"
+                  duration={0.35}
+                  animationMode="evenodd"
+                  shuffleTimes={1}
+                  ease="power3.out"
+                  stagger={0.03}
+                  threshold={0.1}
+                  triggerOnce={true}
+                  triggerOnHover
+                  respectReducedMotion={true}
+                  loop={false}
+                  loopDelay={0}
                   className="text-primary"
-                >
-                  Artelio
-                </ScrambledText>
+                  tag="span"
+                />
+
             </motion.h1>
 
           <motion.p
