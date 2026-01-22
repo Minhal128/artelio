@@ -285,7 +285,12 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7 }: CrowdCanvasProps) => {
 
 const Skiper39 = () => {
   return (
-    <div className="relative h-full w-full bg-transparent text-black overflow-hidden min-h-[400px]">
+    <div className="relative h-[400px] w-full bg-white text-black overflow-hidden">
+      <div className="top-22 absolute left-1/2 grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-black">
+        <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-white after:to-black after:content-['']">
+          Croud Canvas
+        </span>
+      </div>
       <div className="absolute bottom-0 h-full w-full">
         <CrowdCanvas src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/open-peeps-sheet.png" rows={15} cols={7} />
       </div>
@@ -294,3 +299,22 @@ const Skiper39 = () => {
 };
 
 export { CrowdCanvas, Skiper39 };
+
+/**
+ * Skiper 39 Canvas_Landing_004 — React + Canvas
+ * Inspired by and adapted from https://codepen.io/zadvorsky/pen/xxwbBQV
+ * illustration by https://www.openpeeps.com/
+ * We respect the original creators. This is an inspired rebuild with our own taste and does not claim any ownership.
+ * These animations aren’t associated with the codepen.io . They’re independent recreations meant to study interaction design
+ *
+ * License & Usage:
+ * - Free to use and modify in both personal and commercial projects.
+ * - Attribution to Skiper UI is required when using the free version.
+ * - No attribution required with Skiper UI Pro.
+ *
+ * Feedback and contributions are welcome.
+ *
+ * Author: @gurvinder-singh02
+ * Website: https://gxuri.in
+ * Twitter: https://x.com/Gur__vi
+ */

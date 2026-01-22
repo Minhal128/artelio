@@ -238,16 +238,9 @@ export default function ContactPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6, duration: 1 }}
-        className="relative z-10 w-full h-[50vh] min-h-[500px] mt-24"
+        className="relative z-10 w-full mt-24"
       >
         <Skiper39 />
-        
-        {/* Optional: Add a small copyright or brand mark over the canvas for a 'footer' feel */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 pointer-events-none">
-          <p className="text-[10px] uppercase tracking-[0.4em] text-stone-400 font-medium italic bg-white/50 backdrop-blur-sm px-6 py-2 rounded-full">
-            Artelio Atelier &copy; 2026 &mdash; Souls in Motion
-          </p>
-        </div>
       </motion.div>
     </div>
   );
