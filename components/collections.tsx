@@ -41,31 +41,56 @@ const collectionCards = [
 
 export function Collections() {
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (!containerRef.current || !sectionRef.current) return;
+    if (!sectionRef.current) return;
 
-    const container = containerRef.current;
-    const totalWidth = container.scrollWidth;
-    const viewportWidth = window.innerWidth;
-    const scrollAmount = totalWidth - viewportWidth;
+    const cards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
+    const totalCards = cards.length;
 
-    if (scrollAmount <= 0) return;
+    // Initial state
+    gsap.set(cards, { x: "100%", y: "0%" });
+    gsap.set(cards[0], { x: "0%", y: "0%" });
 
-    gsap.to(container, {
-      x: -scrollAmount,
-      ease: "none",
+    const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
+        start: "top top",
+        end: `+=${window.innerHeight * totalCards}`,
         pin: true,
         scrub: 1,
-        start: "top top",
-        end: () => `+=${scrollAmount}`,
-        invalidateOnRefresh: true,
+        anticipatePin: 1,
       },
+    });
+
+    cards.forEach((card, i) => {
+      if (i === 0) {
+        // First card only moves UP
+        tl.to(card, {
+          y: "-100%",
+          duration: 1,
+          ease: "power2.inOut",
+        }, i);
+      } else {
+        // Subsequent cards: Come from RIGHT to CENTER
+        tl.fromTo(card, 
+          { x: "100%", y: "0%" },
+          { x: "0%", y: "0%", duration: 1, ease: "power2.inOut" },
+          i - 1 // Start as previous card moves up
+        );
+
+        // Then move UP to exit (except the last card stays if needed, but usually all exit)
+        if (i < totalCards - 1) {
+          tl.to(card, {
+            y: "-100%",
+            duration: 1,
+            ease: "power2.inOut",
+          }, i);
+        }
+      }
     });
 
     return () => {
@@ -74,36 +99,44 @@ export function Collections() {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden bg-[#f5f1e8]">
-      <div className="absolute top-12 left-12 z-20">
-        <h2 className="font-serif text-5xl md:text-8xl tracking-tighter text-black mix-blend-difference">
+    <section 
+      ref={sectionRef} 
+      className="relative h-screen w-full overflow-hidden bg-black"
+    >
+      <div className="absolute top-12 left-12 z-50 pointer-events-none">
+        <h2 className="font-serif text-5xl md:text-8xl tracking-tighter text-white mix-blend-difference">
           Our Collections
         </h2>
       </div>
 
-      <div 
-        ref={containerRef}
-        className="flex h-screen items-center"
-        style={{ width: `${collectionCards.length * 100}vw` }}
-      >
-        {collectionCards.map((card) => (
+      <div className="relative h-full w-full">
+        {collectionCards.map((card, i) => (
           <div 
             key={card.id}
-            className="relative h-screen w-screen flex-shrink-0 overflow-hidden"
+            ref={(el) => { cardsRef.current[i] = el }}
+            className="absolute inset-0 h-full w-full overflow-hidden"
           >
-            <img
-              src={card.image}
-              alt={card.title}
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/10" />
-            <div className="absolute bottom-16 left-12 text-white">
-              <span className="text-xs uppercase tracking-[0.4em] font-bold mb-2 block opacity-80">
-                {card.category}
-              </span>
-              <h3 className="font-serif text-4xl md:text-6xl italic">
-                {card.title}
-              </h3>
+            <div className="relative h-full w-full">
+              <img
+                src={card.image}
+                alt={card.title}
+                className="h-full w-full object-cover scale-110" // scale-110 for a bit of zoom room
+              />
+              <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute bottom-24 left-12 right-12 z-10 text-white">
+                <div className="max-w-4xl">
+                  <span className="text-sm uppercase tracking-[0.5em] font-bold mb-4 block opacity-70">
+                    {card.category}
+                  </span>
+                  <h3 className="font-serif text-6xl md:text-9xl leading-tight mb-8">
+                    {card.title}
+                  </h3>
+                  <div className="h-[1px] w-32 bg-white/50 mb-8" />
+                  <p className="text-lg md:text-xl font-light opacity-80 max-w-xl">
+                    Discover the essence of modern architectural beauty and abstract expressionism in our latest curated series.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         ))}
