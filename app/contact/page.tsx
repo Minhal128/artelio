@@ -74,7 +74,7 @@ export default function ContactPage() {
       <div className="absolute top-0 left-0 w-64 h-64 bg-orange-50 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 opacity-60" />
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-stone-100 rounded-full blur-3xl translate-x-1/3 translate-y-1/3 opacity-60" />
 
-      <div className="px-6 md:px-12 pb-24">
+      <div className="px-6 md:px-12 pb-0">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -238,7 +238,7 @@ export default function ContactPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="relative z-10 w-full mt-0"
+          className="relative z-10 w-full -mt-12"
         >
         <Skiper39 />
       </motion.div>
