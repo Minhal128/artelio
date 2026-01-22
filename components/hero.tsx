@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { CircularGallery } from "./CircularGallery"
+import GlitchText from "./GlitchText"
 
 export function Hero() {
   const images = [
@@ -99,21 +100,16 @@ export function Hero() {
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
         </motion.div>
 
-        <motion.h1
-          variants={itemVariants}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.9] mb-6 max-w-5xl"
-        >
-          Elevate Your <br />
-          <span className="relative inline-block italic text-primary">
-            Aesthetic
-            <motion.div
-              initial={{ width: 0 }}
-              animate={{ width: "100%" }}
-              transition={{ duration: 1.2, delay: 1.5, ease: "easeInOut" }}
-              className="absolute -bottom-2 left-0 h-[2px] bg-primary/30"
-            />
-          </span>
-        </motion.h1>
+          <motion.div variants={itemVariants} className="mb-6">
+            <GlitchText
+              speed={1}
+              enableShadows
+              enableOnHover={false}
+              className="font-serif text-5xl md:text-7xl lg:text-9xl font-medium tracking-tighter leading-none"
+            >
+              Artelio
+            </GlitchText>
+          </motion.div>
 
           <motion.p
             variants={itemVariants}
