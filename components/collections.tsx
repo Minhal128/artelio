@@ -37,12 +37,29 @@ const collectionCards = [
     image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=2000&auto=format&fit=crop",
     category: "Modern Art",
   },
+  {
+    id: 6,
+    title: "Geometric Silence",
+    image: "https://images.unsplash.com/photo-1500462859194-88521fdd9900?q=80&w=2000&auto=format&fit=crop",
+    category: "Minimalism",
+  },
+  {
+    id: 7,
+    title: "Vivid Dreams",
+    image: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=2000&auto=format&fit=crop",
+    category: "Expressionism",
+  },
+  {
+    id: 8,
+    title: "Liquid Gold",
+    image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=2000&auto=format&fit=crop",
+    category: "Fluid Art",
+  },
 ];
 
 export function Collections() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -50,21 +67,17 @@ export function Collections() {
     if (!sectionRef.current) return;
 
     const cards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
-    const categoryElements = categoryRefs.current.filter((el): el is HTMLDivElement => el !== null);
     const totalCards = cards.length;
 
     // Initial state: first card visible, others hidden to the right
     gsap.set(cards, { x: "100%", y: "0%", opacity: 0 });
     gsap.set(cards[0], { x: "0%", y: "0%", opacity: 1 });
     
-    gsap.set(categoryElements, { y: 100, opacity: 0 });
-    gsap.set(categoryElements[0], { y: 0, opacity: 1 });
-
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: `+=${window.innerHeight * totalCards * 2}`,
+        end: `+=${window.innerHeight * totalCards * 1.5}`,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
@@ -82,13 +95,6 @@ export function Collections() {
           duration: 1,
           ease: "power2.inOut",
         }, i * 2 - 0.5);
-
-        tl.to(categoryElements[i], {
-          y: 0,
-          opacity: 1,
-          duration: 0.5,
-          ease: "power2.out",
-        }, i * 2);
       }
 
       // Step 2: Move card UP to exit (if not last)
@@ -97,13 +103,6 @@ export function Collections() {
           y: "-120%",
           duration: 1,
           ease: "power2.inOut",
-        }, i * 2 + 1);
-
-        tl.to(categoryElements[i], {
-          y: -100,
-          opacity: 0,
-          duration: 0.5,
-          ease: "power2.in",
         }, i * 2 + 1);
       }
     });
@@ -118,32 +117,10 @@ export function Collections() {
       ref={sectionRef} 
       className="relative h-screen w-full overflow-hidden bg-white flex items-center justify-center p-4 md:p-10"
     >
-      <div className="relative w-full h-full max-h-[850px] max-w-[1600px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner">
-        {/* "Our Collections" Header - Top Left */}
-        <div className="absolute top-12 left-12 z-0">
-          <h2 className="font-serif text-8xl md:text-[12rem] tracking-tighter text-black leading-[0.75]">
-            Our<br />Collections
-          </h2>
-        </div>
-
-        {/* Dynamic Category Title - Bottom Left */}
-        <div className="absolute bottom-16 left-16 z-0 h-[100px] md:h-[140px] overflow-hidden">
-          {collectionCards.map((card, i) => (
-            <div
-              key={`cat-${card.id}`}
-              ref={(el) => { categoryRefs.current[i] = el }}
-              className="absolute bottom-0 left-0 whitespace-nowrap"
-            >
-              <h3 className="font-serif italic text-5xl md:text-8xl text-black/90">
-                {card.category}
-              </h3>
-            </div>
-          ))}
-        </div>
-
-        {/* Cards Container - Aligned to Right */}
-        <div className="relative h-full w-full flex items-center justify-end pr-[8%] lg:pr-[12%]">
-          <div className="relative w-[65vw] sm:w-[40vw] md:w-[32vw] lg:w-[28vw] h-[60vh] md:h-[70vh]">
+      <div className="relative w-full h-full max-h-[850px] max-w-[1600px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
+        {/* Cards Container - Centered */}
+        <div className="relative h-full w-full flex items-center justify-center">
+          <div className="relative w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[35vw] h-[60vh] md:h-[70vh]">
             {collectionCards.map((card, i) => (
               <div 
                 key={card.id}
