@@ -1,158 +1,184 @@
-"use client"
+"use client";
 
-import { Navbar } from "@/components/navbar"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
-import { Skiper39 } from "@/components/ui/crowd-canvas"
-import { PaymentGateways } from "@/components/payment-gateways"
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { toast } from "sonner";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+
+const formSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  subject: z.string().min(2, "Subject must be at least 2 characters"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+});
 
 export default function ContactPage() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  }
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
     },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsSubmitting(true);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast.success("Message sent successfully!");
+        form.reset();
+      } else {
+        toast.error(data.message || "Failed to send message.");
+      }
+    } catch (error) {
+      toast.error("An error occurred. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
-    <main className="min-h-screen bg-[#f5f1e8] font-sans selection:bg-primary/20">
-      <Navbar />
-      
-      <PaymentGateways />
+    <div className="min-h-screen bg-[#fdfaf3] py-20 px-4 md:px-8">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="max-w-4xl mx-auto"
+      >
+        <div className="text-center mb-16">
+          <h1 className="text-5xl md:text-7xl font-serif font-medium text-black mb-4">
+            Contact Us
+          </h1>
+          <p className="text-xl text-black/60 font-light max-w-2xl mx-auto italic">
+            Have a question or want to work together? Drop us a message and we'll get back to you shortly.
+          </p>
+        </div>
 
-      <div className="max-w-[1400px] mx-auto px-8 py-20 lg:py-32">
-        <motion.div 
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 lg:grid-cols-2 gap-20"
-        >
-          {/* Left Side: Contact Information */}
-          <div className="space-y-12">
-            <motion.div variants={itemVariants}>
-              <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-black leading-tight tracking-tighter mb-6">
-                Connect with <span className="text-primary italic">Artelio</span>
-              </h1>
-              <p className="text-black/60 text-lg md:text-xl max-w-md font-light leading-relaxed">
-                Whether you're looking to acquire a masterpiece or seeking artistic consultation, our curators are here to guide you.
-              </p>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="space-y-8">
-              <div className="flex items-start gap-6 group">
-                <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
-                  <Mail size={20} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-black/40 mb-1">Email Us</p>
-                  <p className="text-xl font-medium text-black">curator@artelio.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
-                  <Phone size={20} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-black/40 mb-1">Call Us</p>
-                  <p className="text-xl font-medium text-black">+1 (234) 567-890</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-6 group">
-                <div className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-500">
-                  <MapPin size={20} strokeWidth={1.5} />
-                </div>
-                <div>
-                  <p className="text-xs uppercase tracking-widest text-black/40 mb-1">Visit Gallery</p>
-                  <p className="text-xl font-medium text-black">72 Rue de l'Art, Paris, France</p>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="pt-8 border-t border-black/5">
-              <div className="flex gap-8">
-                {["Instagram", "Twitter", "LinkedIn"].map((social) => (
-                  <a key={social} href="#" className="text-xs uppercase tracking-widest text-black/60 hover:text-black transition-colors">
-                    {social}
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="md:col-span-1 space-y-8">
+            <div>
+              <h3 className="text-xl font-serif font-medium text-black mb-2">Email</h3>
+              <p className="text-black/60">artelio512@gmail.com</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-serif font-medium text-black mb-2">Support</h3>
+              <p className="text-black/60">Available 24/7 for our premium partners.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-serif font-medium text-black mb-2">Location</h3>
+              <p className="text-black/60">Global / Remote</p>
+            </div>
           </div>
 
-          {/* Right Side: Contact Form */}
-          <motion.div 
-            variants={itemVariants}
-            className="bg-white/50 backdrop-blur-xl rounded-3xl p-8 md:p-12 border border-black/5 shadow-2xl shadow-black/5"
-          >
-            <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 ml-1">Your Name</label>
-                <Input 
-                  placeholder="Alexander Artelio" 
-                  className="bg-transparent border-0 border-b border-black/10 rounded-none px-1 focus-visible:ring-0 focus-visible:border-primary transition-all text-lg placeholder:text-black/20 pb-4"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 ml-1">Email Address</label>
-                <Input 
-                  type="email"
-                  placeholder="alexander@example.com" 
-                  className="bg-transparent border-0 border-b border-black/10 rounded-none px-1 focus-visible:ring-0 focus-visible:border-primary transition-all text-lg placeholder:text-black/20 pb-4"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 ml-1">Subject</label>
-                <Input 
-                  placeholder="Acquisition Inquiry" 
-                  className="bg-transparent border-0 border-b border-black/10 rounded-none px-1 focus-visible:ring-0 focus-visible:border-primary transition-all text-lg placeholder:text-black/20 pb-4"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-[0.2em] font-bold text-black/40 ml-1">Message</label>
-                <Textarea 
-                  placeholder="Tell us about your artistic vision..." 
-                  className="bg-transparent border-0 border-b border-black/10 rounded-none px-1 focus-visible:ring-0 focus-visible:border-primary transition-all text-lg placeholder:text-black/20 min-h-[150px] resize-none"
-                />
-              </div>
-
-              <Button className="w-full bg-black text-white hover:bg-primary transition-all duration-500 py-8 rounded-full text-xs uppercase tracking-widest font-bold group">
-                Send Message
-                <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </Button>
-            </form>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Crowd Canvas Section */}
-      <div className="w-full h-[400px] relative overflow-hidden mt-10">
-        <Skiper39 />
-      </div>
-
-      {/* Decorative Elements */}
-      <div className="fixed bottom-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] -z-10 pointer-events-none" />
-      <div className="fixed top-0 left-0 w-[300px] h-[300px] bg-primary/5 rounded-full blur-[100px] -z-10 pointer-events-none" />
-    </main>
-  )
+          <Card className="md:col-span-2 border-none bg-white/50 backdrop-blur-sm shadow-xl shadow-black/5">
+            <CardHeader>
+              <CardTitle className="font-serif text-2xl">Send a Message</CardTitle>
+              <CardDescription>
+                Fill out the form below and our team will reach out to you.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="John Doe" {...field} className="bg-white" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input placeholder="john@example.com" {...field} className="bg-white" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Subject</FormLabel>
+                        <FormControl>
+                          <Input placeholder="How can we help?" {...field} className="bg-white" />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us more about your project..."
+                            className="min-h-[150px] bg-white"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full bg-[#b3633d] hover:bg-[#a05634] text-white py-6 text-lg rounded-none transition-colors"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              </Form>
+            </CardContent>
+          </Card>
+        </div>
+      </motion.div>
+    </div>
+  );
 }

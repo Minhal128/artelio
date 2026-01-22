@@ -53,24 +53,24 @@ const CharacterV3 = ({
   const isSpace = char === " ";
   const distanceFromCenter = index - centerIndex;
 
-  const x = useTransform(
-    progress,
-    [0.1, 0.6],
-    [distanceFromCenter * 120, 0],
-  );
-  const rotate = useTransform(
-    progress,
-    [0.1, 0.6],
-    [distanceFromCenter * 60, 0],
-  );
-
-  const y = useTransform(
-    progress,
-    [0.1, 0.6],
-    [-Math.abs(distanceFromCenter) * 30, 0],
-  );
-  const scale = useTransform(progress, [0.1, 0.6], [0.6, 1]);
-  const opacity = useTransform(progress, [0.1, 0.2, 0.6], [0, 1, 1]);
+    const x = useTransform(
+      progress,
+      [0.1, 0.9],
+      [distanceFromCenter * 120, 0],
+    );
+    const rotate = useTransform(
+      progress,
+      [0.1, 0.9],
+      [distanceFromCenter * 60, 0],
+    );
+  
+    const y = useTransform(
+      progress,
+      [0.1, 0.9],
+      [-Math.abs(distanceFromCenter) * 30, 0],
+    );
+    const scale = useTransform(progress, [0.1, 0.9], [0.6, 1]);
+    const opacity = useTransform(progress, [0.1, 0.2, 0.9], [0, 1, 1]);
 
   return (
     <motion.img
