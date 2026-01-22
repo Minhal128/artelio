@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import CurvedLoop from "./ui/CurvedLoop";
 
 const collectionCards = [
   {
@@ -69,10 +70,16 @@ export function Collections() {
     const cards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
     const totalCards = cards.length;
 
-    // Initial state: first card visible, others hidden to the right
-    gsap.set(cards, { x: "100%", y: "0%", opacity: 0 });
-    gsap.set(cards[0], { x: "0%", y: "0%", opacity: 1 });
-    
+    // Initial state: cards stacked with slight offset and scale
+    cards.forEach((card, i) => {
+      gsap.set(card, {
+        zIndex: totalCards - i,
+        scale: 1 - i * 0.05,
+        y: i * 20,
+        opacity: i < 3 ? 1 : 0, // Only show top 3 for cleaner stack
+      });
+    });
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
@@ -85,25 +92,27 @@ export function Collections() {
     });
 
     cards.forEach((card, i) => {
-      const isLast = i === totalCards - 1;
-      
-      // Step 1: Bring card in from RIGHT (if not first)
-      if (i > 0) {
+      if (i < totalCards - 1) {
+        // Top card moves UP and OUT
         tl.to(card, {
-          x: "0%",
-          opacity: 1,
+          y: "-150%",
+          opacity: 0,
+          rotate: i % 2 === 0 ? -10 : 10,
           duration: 1,
           ease: "power2.inOut",
-        }, i * 2 - 0.5);
-      }
+        }, i);
 
-      // Step 2: Move card UP to exit (if not last)
-      if (!isLast) {
-        tl.to(card, {
-          y: "-120%",
-          duration: 1,
-          ease: "power2.inOut",
-        }, i * 2 + 1);
+        // Cards behind move FORWARD
+        cards.slice(i + 1).forEach((nextCard, nextIndex) => {
+          const relativeIndex = nextIndex; // index relative to the new top
+          tl.to(nextCard, {
+            scale: 1 - relativeIndex * 0.05,
+            y: relativeIndex * 20,
+            opacity: relativeIndex < 3 ? 1 : 0,
+            duration: 1,
+            ease: "power2.inOut",
+          }, i);
+        });
       }
     });
 
@@ -117,9 +126,20 @@ export function Collections() {
       ref={sectionRef} 
       className="relative h-screen w-full overflow-hidden bg-white flex items-center justify-center p-4 md:p-10"
     >
-    <div className="relative w-full h-full max-h-[600px] max-w-[1200px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
-      {/* Cards Container - Centered */}
-        <div className="relative h-full w-full flex items-center justify-center">
+      <div className="relative w-full h-full max-h-[600px] max-w-[1200px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
+        
+        {/* Background Decorative Element */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center">
+           <CurvedLoop 
+              marqueeText="OUR EXCLUSIVE COLLECTIONS ✦ ARTELIO ✦ EST 2026 ✦ CURATED PIECES ✦ "
+              speed={1.5}
+              curveAmount={300}
+              className="text-black/5"
+            />
+        </div>
+
+        {/* Cards Container - Centered */}
+        <div className="relative z-10 h-full w-full flex items-center justify-center">
           <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[50%] max-w-[700px] aspect-[1.6] md:aspect-[1.6]">
               {collectionCards.map((card, i) => (
                 <div 
@@ -139,7 +159,7 @@ export function Collections() {
                       <span className="text-[12px] uppercase tracking-[0.6em] font-black mb-4 block opacity-100 text-white/90">
                         {card.category}
                       </span>
-                      <h4 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
+                      <h4 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
                         {card.title}
                       </h4>
                     </div>
