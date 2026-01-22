@@ -16,8 +16,8 @@ export function Navbar({ showAppointment = true }: { showAppointment?: boolean }
       },
       { 
         name: "Gallery", 
-        href: pathname === "/contact" ? "/#gallery" : "#gallery", 
-        active: false 
+        href: "/gallery", 
+        active: pathname === "/gallery" 
       },
       { 
         name: "Contact", 
