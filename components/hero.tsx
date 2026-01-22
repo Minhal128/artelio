@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { CircularGallery } from "./CircularGallery"
-import GlitchText from "./GlitchText"
+import ScrambledText from "./ScrambledText"
 
 export function Hero() {
   const images = [
@@ -100,16 +100,17 @@ export function Hero() {
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
         </motion.div>
 
-          <motion.div variants={itemVariants} className="mb-6">
-            <GlitchText
-              speed={1}
-              enableShadows
-              enableOnHover={false}
-              className="font-serif text-5xl md:text-7xl lg:text-9xl font-medium tracking-tighter leading-none"
-            >
-              Artelio
-            </GlitchText>
-          </motion.div>
+            <motion.div variants={itemVariants} className="mb-6">
+              <ScrambledText
+                radius={100}
+                duration={1.2}
+                speed={0.5}
+                scrambleChars=".:"
+                className="font-serif text-5xl md:text-7xl lg:text-9xl font-medium tracking-tighter leading-none text-black mx-auto"
+              >
+                Artelio
+              </ScrambledText>
+            </motion.div>
 
           <motion.p
             variants={itemVariants}
