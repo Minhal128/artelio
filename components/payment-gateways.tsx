@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionTemplate } from "framer-motion";
-import ReactLenis from "lenis/react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -106,16 +105,10 @@ const Bracket = ({ className }: { className: string }) => {
 
 export function PaymentGateways() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const perspectiveRef = useRef<HTMLDivElement | null>(null);
 
   const { scrollYProgress: containerProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
-  });
-
-  const { scrollYProgress: perspectiveProgress } = useScroll({
-    target: perspectiveRef,
-    offset: ["start center", "end end"],
   });
 
   const text = "Seamless Checkout";
@@ -128,94 +121,50 @@ export function PaymentGateways() {
   ];
   const iconCenterIndex = Math.floor(paymentIcons.length / 2);
 
-  // Perspective Text logic
-  const yMotionValue = useTransform(perspectiveProgress, [0, 1], [400, -200]);
-  const transform = useMotionTemplate`rotateX(30deg) translateY(${yMotionValue}px) translateZ(10px)`;
-
   return (
-    <ReactLenis root>
-      <section className="w-full bg-[#fdfaf3] relative">
-        {/* Logos Section */}
-        <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[120vh] py-[10vh] overflow-hidden">
-          <div
-            className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black sticky top-[25vh]"
+    <section className="w-full bg-[#fdfaf3] relative">
+      {/* Logos Section */}
+      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[120vh] py-[10vh] overflow-hidden">
+        <div
+          className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black sticky top-[25vh]"
+          style={{ perspective: "1000px" }}
+        >
+          {characters.map((char, index) => (
+            <CharacterV1
+              key={index}
+              char={char}
+              index={index}
+              centerIndex={centerIndex}
+              progress={containerProgress}
+            />
+          ))}
+        </div>
+
+        <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[15vh] z-10">
+          <div className="flex items-center justify-center gap-4 mb-10 opacity-80">
+            <Bracket className="h-8 text-[#b3633d]" />
+            <span className="font-serif text-2xl font-light text-black/80 italic">
+              Secure & Fast Payments
+            </span>
+            <Bracket className="h-8 scale-x-[-1] text-[#b3633d]" />
+          </div>
+          
+          <div 
+            className="flex items-center justify-center"
             style={{ perspective: "1000px" }}
           >
-            {characters.map((char, index) => (
-              <CharacterV1
+            {paymentIcons.map((char, index) => (
+              <CharacterV3
                 key={index}
                 char={char}
                 index={index}
-                centerIndex={centerIndex}
+                centerIndex={iconCenterIndex}
                 progress={containerProgress}
               />
             ))}
           </div>
-
-          <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[15vh] z-10">
-            <div className="flex items-center justify-center gap-4 mb-10 opacity-80">
-              <Bracket className="h-8 text-[#b3633d]" />
-              <span className="font-serif text-2xl font-light text-black/80 italic">
-                Secure & Fast Payments
-              </span>
-              <Bracket className="h-8 scale-x-[-1] text-[#b3633d]" />
-            </div>
-            
-            <div 
-              className="flex items-center justify-center"
-              style={{ perspective: "1000px" }}
-            >
-              {paymentIcons.map((char, index) => (
-                <CharacterV3
-                  key={index}
-                  char={char}
-                  index={index}
-                  centerIndex={iconCenterIndex}
-                  progress={containerProgress}
-                />
-              ))}
-            </div>
-          </div>
         </div>
-
-        {/* Perspective Text Section (Skiper28) */}
-        <div
-          ref={perspectiveRef}
-          className="relative z-0 h-[200vh] w-full flex flex-col items-center justify-start bg-transparent text-black overflow-hidden -mt-20"
-        >
-          <div className="grid content-start justify-items-center gap-6 text-center text-black mb-20">
-            <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-[#b3633d] after:to-transparent after:content-[''] after:mt-4">
-              scroll for more
-            </span>
-          </div>
-          
-          <div
-            className="sticky top-20 mx-auto flex items-center justify-center bg-transparent py-20"
-            style={{
-              transformStyle: "preserve-3d",
-              perspective: "200px",
-            }}
-          >
-            <motion.div
-              style={{
-                transformStyle: "preserve-3d",
-                transform,
-              }}
-              className="w-full max-w-4xl px-6 text-center text-4xl md:text-5xl font-serif font-bold tracking-tighter text-[#b3633d] leading-none opacity-50"
-            >
-              Jatt seeweyan cho langheya chudail takkri jaani badi sohni bhoot
-              female takkri .. kehndi jatta .. oye jatta.... kehndi jatta .. metho
-              darke ho ja katha .. nai tan aah kar du ... nai tan waah kardu...
-              tenu ethe khade khade nu swah kardu ... jatt kehnda hor menu ki
-              chahida ... jatt kehnda hor menu ki chahida .. avein gallan-baatan
-              vich bohta sama na gva aaja chimbad ja ... mein keha chimbad ja .. .
-              aaja chimbad ja ... mein keha chimbad ja .. .
-              
-              <div className="absolute bottom-0 left-0 h-[40vh] w-full bg-gradient-to-b from-transparent to-[#fdfaf3] pointer-events-none" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-    </ReactLenis>
+      </div>
+    </section>
   );
 }
