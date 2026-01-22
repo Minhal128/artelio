@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { CircularGallery } from "./CircularGallery"
 
 export function Hero() {
   const images = [
@@ -27,6 +28,15 @@ export function Hero() {
       alt: "Renaissance sculpture",
       className: "h-[320px] md:h-[450px]",
     },
+  ]
+
+  const galleryItems = [
+    { image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop", text: "Classical" },
+    { image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=800&auto=format&fit=crop", text: "Abstract" },
+    { image: "https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=800&auto=format&fit=crop", text: "Modern" },
+    { image: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=800&auto=format&fit=crop", text: "Sculpture" },
+    { image: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=800&auto=format&fit=crop", text: "Renaissance" },
+    { image: "https://images.unsplash.com/photo-1576769267415-9642010aa962?q=80&w=800&auto=format&fit=crop", text: "Expression" },
   ]
 
   const containerVariants = {
@@ -59,7 +69,7 @@ export function Hero() {
   }
 
   return (
-    <section className="relative flex flex-col items-center text-center pt-24 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
+    <section className="relative flex flex-col items-center text-center pt-16 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
       {/* Dynamic Background Accents */}
       <motion.div
         variants={splashVariants}
@@ -84,14 +94,14 @@ export function Hero() {
         {/* Modern Label */}
         <motion.div 
           variants={itemVariants}
-          className="mb-8 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm"
+          className="mb-6 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm"
         >
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
         </motion.div>
 
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[0.9] mb-8 max-w-5xl"
+          className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tighter leading-[0.9] mb-6 max-w-5xl"
         >
           Elevate Your <br />
           <span className="relative inline-block italic text-primary">
@@ -107,43 +117,34 @@ export function Hero() {
 
         <motion.p
           variants={itemVariants}
-          className="text-muted-foreground text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-light"
+          className="text-muted-foreground text-base md:text-lg max-w-3xl mb-8 leading-relaxed font-light"
         >
           Where timeless masterpieces meet contemporary vision. Discover high-end art collections curated for the modern connoisseur.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-20">
-          <Button className="rounded-full h-14 px-10 text-lg bg-primary hover:bg-primary/90 transition-all hover:scale-105 group">
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-12">
+          <Button className="rounded-full h-12 px-8 text-base bg-primary hover:bg-primary/90 transition-all hover:scale-105 group">
             Explore Gallery
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="outline" className="rounded-full h-14 px-10 text-lg border-primary/20 hover:bg-primary/5 transition-all">
+          <Button variant="outline" className="rounded-full h-12 px-8 text-base border-primary/20 hover:bg-primary/5 transition-all">
             Our Story
           </Button>
         </motion.div>
 
-        {/* High-End Image Grid */}
+        {/* Circular Gallery Integration */}
         <motion.div 
           variants={itemVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full px-4 mb-32"
+          className="w-full h-[500px] relative mb-24"
         >
-          {images.map((img, idx) => (
-            <motion.div
-              key={idx}
-              whileHover={{ y: -10 }}
-              className={`relative overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 group ${img.className}`}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-110"
-                sizes="(max-width: 768px) 50vw, 25vw"
-                priority={idx < 2}
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
-            </motion.div>
-          ))}
+          <CircularGallery 
+            items={galleryItems}
+            bend={3} 
+            textColor="#ffffff" 
+            borderRadius={0.05} 
+            scrollEase={0.02}
+            scrollSpeed={2}
+          />
         </motion.div>
         
         <LogoMarquee />
