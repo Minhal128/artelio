@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LenisProvider } from "@/components/providers/lenis-provider"
+import { Toaster } from "@/components/ui/sonner"
 import "./globals.css"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
@@ -43,6 +44,7 @@ export default function RootLayout({
         <LenisProvider>
           {children}
         </LenisProvider>
+        <Toaster />
         <Analytics />
       </body>
     </html>

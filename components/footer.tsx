@@ -10,16 +10,19 @@ export function Footer() {
         {/* Banner Card */}
         <div className="relative w-full h-[450px] rounded-[4rem] overflow-hidden mb-24 shadow-2xl">
           <Image src="/abstract-tea-cup-on-balcony-painting.jpg" alt="Art banner" fill className="object-cover" />
-          <div className="absolute right-12 top-1/2 -translate-y-1/2 bg-[#fdfaf3]/95 backdrop-blur-md p-14 rounded-[3.5rem] max-w-xl shadow-2xl border border-white/40">
-            <h2 className="font-serif text-5xl font-bold mb-6 text-[#1a1a1a] leading-tight">Get in Touch</h2>
-            <p className="text-muted-foreground mb-10 text-xl leading-relaxed">
-              Have a question or need assistance? Reach out to us using the form below, and we'll get back to you as
-              soon as possible.
-            </p>
-            <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-7 text-xl shadow-lg transition-transform hover:scale-105">
-              Submit Inquiry
-            </Button>
-          </div>
+            <div className="absolute right-12 top-1/2 -translate-y-1/2 bg-[#fdfaf3]/95 backdrop-blur-md p-14 rounded-[3.5rem] max-w-xl shadow-2xl border border-white/40">
+              <h2 className="font-serif text-5xl font-bold mb-6 text-[#1a1a1a] leading-tight">Get in Touch</h2>
+              <p className="text-muted-foreground mb-10 text-xl leading-relaxed">
+                Have a question or need assistance? Reach out to us using the form below, and we'll get back to you as
+                soon as possible.
+              </p>
+              <Link href="/contact">
+                <Button className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-7 text-xl shadow-lg transition-transform hover:scale-105">
+                  Submit Inquiry
+                </Button>
+              </Link>
+            </div>
+
         </div>
 
         {/* Links Grid */}
