@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
-import { ImageGrid } from "@/components/image-grid"
 import { Footer } from "@/components/footer"
 import { About } from "@/components/about"
 import { Services } from "@/components/services"
@@ -12,7 +11,6 @@ export default function Home() {
     <main className="min-h-screen bg-background font-sans selection:bg-primary/20">
       <Navbar />
       <Hero />
-      <ImageGrid />
       <About />
       <Services />
       <Collections />
