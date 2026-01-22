@@ -127,14 +127,14 @@ export function Hero() {
           variants={itemVariants}
           className="w-full h-[600px] relative mb-16"
         >
-          <CircularGallery 
-            items={galleryItems}
-            bend={3} 
-            textColor="#ffffff" 
-            borderRadius={0.05} 
-            scrollEase={0.02}
-            scrollSpeed={2}
-          />
+            <CircularGallery 
+              items={galleryItems}
+              bend={3} 
+              textColor="#ffffff" 
+              borderRadius={0.05} 
+              scrollEase={0.02}
+              scrollSpeed={1}
+            />
         </motion.div>
         
         <LogoMarquee />
