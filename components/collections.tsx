@@ -3,7 +3,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import ReactLenis from "lenis/react";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -103,10 +102,10 @@ const StickyCard002 = ({
 
   return (
     <div className={cn("relative h-full w-full", className)} ref={container}>
-      <div className="sticky-cards relative flex h-full w-full items-center justify-center overflow-hidden p-3 lg:p-8">
+      <div className="sticky-cards relative flex h-full w-full items-center justify-center overflow-hidden">
         <div
           className={cn(
-            "relative h-[90vh] w-full max-w-sm overflow-hidden rounded-lg sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl 2xl:max-w-3xl",
+            "relative h-screen w-full overflow-hidden",
             containerClassName,
           )}
         >
@@ -116,7 +115,7 @@ const StickyCard002 = ({
               src={card.image}
               alt={card.alt || ""}
               className={cn(
-                "rounded-4xl absolute h-full w-full object-cover",
+                "absolute h-full w-full object-cover",
                 imageClassName,
               )}
               ref={(el) => {
@@ -134,44 +133,42 @@ export function Collections() {
   const collectionCards = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1000&auto=format&fit=crop",
-      alt: "Floral Masterpiece",
+      image: "https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=1600&auto=format&fit=crop",
+      alt: "Vibrant Abstract",
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1000&auto=format&fit=crop",
-      alt: "Classical Architecture",
+      image: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1600&auto=format&fit=crop",
+      alt: "Silk Textures",
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1515405295579-ba7b45403062?q=80&w=1000&auto=format&fit=crop",
-      alt: "Abstract Fluidity",
+      image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1600&auto=format&fit=crop",
+      alt: "Geometric Architecture",
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1554188248-986adbb73be4?q=80&w=1000&auto=format&fit=crop",
-      alt: "Modern Minimalist",
+      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
+      alt: "Scenic Landscape",
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=1000&auto=format&fit=crop",
-      alt: "Urban Perspective",
+      image: "https://images.unsplash.com/photo-1493333345807-68b2003d11d0?q=80&w=1600&auto=format&fit=crop",
+      alt: "Modern Interior",
     },
   ];
 
   return (
-    <ReactLenis root>
-      <section className="bg-background">
-        <div className="pt-24 px-8 max-w-7xl mx-auto text-center">
-          <h2 className="font-serif text-5xl md:text-7xl mb-6 tracking-tight text-primary">Our Collections</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
-            A journey through curated excellence. Scroll down to explore our most prestigious archives.
-          </p>
-        </div>
-        <div className="min-h-screen w-full">
-          <StickyCard002 cards={collectionCards} />
-        </div>
-      </section>
-    </ReactLenis>
+    <section className="bg-background overflow-hidden">
+      <div className="py-24 px-8 text-center bg-background relative z-10">
+        <h2 className="font-serif text-5xl md:text-8xl mb-6 tracking-tighter text-primary">Our Collections</h2>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
+          Curated excellence across fashion, art, and architecture.
+        </p>
+      </div>
+      <div className="w-full">
+        <StickyCard002 cards={collectionCards} />
+      </div>
+    </section>
   );
 }
