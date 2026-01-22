@@ -39,7 +39,7 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7 }: CrowdCanvasProps) => {
     // TWEEN FACTORIES
     const resetPeep = ({ stage, peep }: { stage: any; peep: any }) => {
       const direction = Math.random() > 0.5 ? 1 : -1;
-      const offsetY = 100 - 250 * gsap.parseEase("power2.in")(Math.random());
+      const offsetY = 120 - 180 * gsap.parseEase("power2.in")(Math.random());
       const startY = stage.height - peep.height + offsetY;
       let startX: number;
       let endX: number;
@@ -279,15 +279,15 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7 }: CrowdCanvasProps) => {
   }, [src, rows, cols]);
 
   return (
-    <canvas ref={canvasRef} className="absolute bottom-0 h-[400px] w-full" />
+    <canvas ref={canvasRef} className="absolute bottom-0 h-[500px] w-full" />
   );
 };
 
 const Skiper39 = () => {
   return (
-    <div className="relative h-[400px] w-full bg-white text-black overflow-hidden">
+    <div className="relative h-[500px] w-full bg-[#fcf9f5] text-black overflow-hidden">
       <div className="top-22 absolute left-1/2 grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-black z-20">
-        <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-white after:to-black after:content-['']">
+        <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-[#fcf9f5] after:to-black after:content-['']">
           Croud Canvas
         </span>
       </div>
