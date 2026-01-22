@@ -12,9 +12,9 @@ export function Navbar() {
             <Link href="#gallery" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
               Gallery
             </Link>
-            <Link href="#contact" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
-              Contact
-            </Link>
+              <Link href="/contact" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
+                Contact
+              </Link>
           </div>
 
           <div className="absolute left-1/2 -translate-x-1/2">

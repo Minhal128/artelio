@@ -398,17 +398,16 @@ const Shuffle: React.FC<ShuffleProps> = ({
   const userHasFont = useMemo(() => className && /font[-[]/i.test(className), [className]);
 
   const fallbackFont = useMemo(
-    () => (userHasFont ? {} : {}),
+    () => ({}),
     [userHasFont]
   );
 
   const commonStyle = useMemo(
     () => ({
       textAlign,
-      ...fallbackFont,
       ...style
     }),
-    [textAlign, fallbackFont, style]
+    [textAlign, style]
   );
 
   const classes = useMemo(
