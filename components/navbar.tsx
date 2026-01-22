@@ -8,23 +8,23 @@ import { cn } from "@/lib/utils"
 export function Navbar() {
   const pathname = usePathname()
 
-  const navLinks = [
-    { 
-      name: "Home", 
-      href: pathname === "/contact" ? "/#home" : "#home", 
-      active: pathname === "/" 
-    },
-    { 
-      name: "Gallery", 
-      href: pathname === "/contact" ? "/#gallery" : "#gallery", 
-      active: false 
-    },
-    { 
-      name: "Contact", 
-      href: "/contact", 
-      active: pathname === "/contact" 
-    },
-  ]
+    const navLinks = [
+      { 
+        name: "Home", 
+        href: "/", 
+        active: pathname === "/" 
+      },
+      { 
+        name: "Gallery", 
+        href: pathname === "/contact" ? "/#gallery" : "#gallery", 
+        active: false 
+      },
+      { 
+        name: "Contact", 
+        href: "/contact", 
+        active: pathname === "/contact" 
+      },
+    ]
 
   return (
     <nav className="sticky top-0 z-50 w-full bg-[#f5f1e8] border-b border-black/5">
