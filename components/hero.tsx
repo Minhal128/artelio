@@ -3,28 +3,29 @@
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 export function Hero() {
   const images = [
     {
-      src: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=1972&auto=format&fit=crop",
-      alt: "Masterpiece oil painting",
-      className: "h-[300px] md:h-[400px]",
+      src: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1945&auto=format&fit=crop",
+      alt: "Classical masterpiece",
+      className: "h-[320px] md:h-[450px]",
     },
     {
-      src: "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=2071&auto=format&fit=crop",
-      alt: "Creative abstract art",
-      className: "h-[200px] md:h-[250px] mt-auto",
+      src: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1976&auto=format&fit=crop",
+      alt: "Abstract canvas",
+      className: "h-[220px] md:h-[280px] mt-auto",
     },
     {
-      src: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=1938&auto=format&fit=crop",
-      alt: "Modern art gallery",
-      className: "h-[200px] md:h-[250px] mt-auto",
+      src: "https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=2079&auto=format&fit=crop",
+      alt: "Modern expressionism",
+      className: "h-[220px] md:h-[280px] mt-auto",
     },
     {
-      src: "https://images.unsplash.com/photo-1554188248-986adbb73be4?q=80&w=2070&auto=format&fit=crop",
-      alt: "Classical sculpture",
-      className: "h-[300px] md:h-[400px]",
+      src: "https://images.unsplash.com/photo-1577083552431-6e5fd01988ec?q=80&w=2072&auto=format&fit=crop",
+      alt: "Renaissance sculpture",
+      className: "h-[320px] md:h-[450px]",
     },
   ]
 
@@ -33,117 +34,115 @@ export function Hero() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
+        staggerChildren: 0.15,
+        delayChildren: 0.3,
       },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 1, ease: [0.22, 1, 0.36, 1] },
     },
   }
 
   const splashVariants = {
-    hidden: { opacity: 0, scale: 0.8, rotate: -10 },
+    hidden: { opacity: 0, scale: 0.8 },
     visible: {
-      opacity: 0.15,
+      opacity: 0.12,
       scale: 1,
-      rotate: 0,
-      transition: { duration: 2, ease: "easeOut" },
+      transition: { duration: 2.5, ease: "easeOut" },
     },
   }
 
   return (
-    <section className="relative flex flex-col items-center text-center pt-20 pb-12 px-4 max-w-7xl mx-auto overflow-hidden">
-      {/* Abstract Splashes */}
+    <section className="relative flex flex-col items-center text-center pt-24 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
+      {/* Dynamic Background Accents */}
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        className="absolute -top-10 -left-10 w-96 h-96 bg-primary rounded-full blur-[110px] pointer-events-none opacity-20"
+        className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-primary rounded-full blur-[120px] pointer-events-none"
       />
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        transition={{ delay: 0.4, duration: 2.2 }}
-        className="absolute top-1/4 -right-10 w-[400px] h-[400px] bg-primary/50 rounded-full blur-[130px] pointer-events-none opacity-25"
-      />
-      <motion.div
-        variants={splashVariants}
-        initial="hidden"
-        animate="visible"
-        transition={{ delay: 0.8, duration: 2.8 }}
-        className="absolute bottom-10 left-1/4 w-80 h-80 bg-primary/30 rounded-full blur-[90px] pointer-events-none opacity-20"
+        transition={{ delay: 0.5 }}
+        className="absolute top-1/3 -right-20 w-[600px] h-[600px] bg-primary/40 rounded-full blur-[150px] pointer-events-none"
       />
 
-      {/* Hero Content */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
         className="relative z-10 flex flex-col items-center w-full"
       >
+        {/* Modern Label */}
+        <motion.div 
+          variants={itemVariants}
+          className="mb-8 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm"
+        >
+          <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
+        </motion.div>
+
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] mb-4 max-w-4xl"
+          className="font-serif text-6xl md:text-8xl lg:text-9xl font-medium tracking-tighter leading-[0.9] mb-8 max-w-5xl"
         >
-          Discover{" "}
-          <span className="relative inline-block italic">
-            Art
-            <motion.svg
-              initial={{ pathLength: 0, opacity: 0 }}
-              animate={{ pathLength: 1, opacity: 0.4 }}
-              transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
-              className="absolute -top-4 -left-6 w-[130%] h-[130%] pointer-events-none"
-              viewBox="0 0 100 40"
-            >
-              <ellipse
-                cx="50"
-                cy="20"
-                rx="48"
-                ry="18"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.7"
-                className="text-primary"
-              />
-            </motion.svg>
-          </span>{" "}
-          That <br />
-          <span className="text-primary">Speaks</span> to You
+          Elevate Your <br />
+          <span className="relative inline-block italic text-primary">
+            Aesthetic
+            <motion.div
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 1.2, delay: 1.5, ease: "easeInOut" }}
+              className="absolute -bottom-2 left-0 h-[2px] bg-primary/30"
+            />
+          </span>
         </motion.h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-muted-foreground text-base md:text-lg max-w-2xl mb-8 leading-relaxed font-light"
-          >
-            Explore a curated collection of contemporary and classic art pieces that inspire, provoke, and captivate.
-          </motion.p>
+        <motion.p
+          variants={itemVariants}
+          className="text-muted-foreground text-lg md:text-xl max-w-3xl mb-10 leading-relaxed font-light"
+        >
+          Where timeless masterpieces meet contemporary vision. Discover high-end art collections curated for the modern connoisseur.
+        </motion.p>
 
-          {/* Integrated Image Grid */}
-          <motion.div 
-            variants={itemVariants}
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full px-4"
-          >
+        <motion.div variants={itemVariants} className="flex flex-wrap justify-center gap-6 mb-20">
+          <Button className="rounded-full h-14 px-10 text-lg bg-primary hover:bg-primary/90 transition-all hover:scale-105 group">
+            Explore Gallery
+            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
+          <Button variant="outline" className="rounded-full h-14 px-10 text-lg border-primary/20 hover:bg-primary/5 transition-all">
+            Our Story
+          </Button>
+        </motion.div>
+
+        {/* High-End Image Grid */}
+        <motion.div 
+          variants={itemVariants}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full px-4 mb-32"
+        >
           {images.map((img, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className={`relative overflow-hidden rounded-[2rem] shadow-lg transition-transform hover:scale-[1.02] duration-300 ${img.className}`}
+              whileHover={{ y: -10 }}
+              className={`relative overflow-hidden rounded-[2.5rem] shadow-2xl transition-all duration-500 group ${img.className}`}
             >
               <Image
-                src={img.src || "/placeholder.svg"}
+                src={img.src}
                 alt={img.alt}
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 768px) 50vw, 25vw"
+                priority={idx < 2}
               />
-            </div>
+              <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500" />
+            </motion.div>
           ))}
         </motion.div>
         
@@ -155,30 +154,30 @@ export function Hero() {
 
 export function LogoMarquee() {
   const items = [
-    { name: "Sotheby's", logo: "https://logo.clearbit.com/sothebys.com" },
-    { name: "Christie's", logo: "https://logo.clearbit.com/christies.com" },
-    { name: "MoMA", logo: "https://logo.clearbit.com/moma.org" },
-    { name: "Tate", logo: "https://logo.clearbit.com/tate.org.uk" },
-    { name: "GitHub", logo: "https://logo.clearbit.com/github.com" },
-    { name: "Artsy", logo: "https://logo.clearbit.com/artsy.net" },
-    { name: "Gagosian", logo: "https://logo.clearbit.com/gagosian.com" },
-    { name: "Artnet", logo: "https://logo.clearbit.com/artnet.com" },
+    { name: "sothebys", logo: "https://logo.clearbit.com/sothebys.com" },
+    { name: "christies", logo: "https://logo.clearbit.com/christies.com" },
+    { name: "moma", logo: "https://logo.clearbit.com/moma.org" },
+    { name: "tate", logo: "https://logo.clearbit.com/tate.org.uk" },
+    { name: "gagosian", logo: "https://logo.clearbit.com/gagosian.com" },
+    { name: "artsy", logo: "https://logo.clearbit.com/artsy.net" },
+    { name: "github", logo: "https://logo.clearbit.com/github.com" },
+    { name: "artnet", logo: "https://logo.clearbit.com/artnet.com" },
   ]
 
   return (
-    <div className="overflow-hidden w-full select-none">
-      <div className="relative overflow-hidden bg-[#0D0B0A] py-12 -rotate-2 mt-16 mb-16 min-w-[150vw] -mx-[25vw] left-0 border-y border-white/5 shadow-[0_20px_50px_rgba(0,0,0,0.4)]">
-        <div className="flex items-center gap-24 animate-marquee whitespace-nowrap hover:[animation-play-state:paused] cursor-pointer">
-          {[...items, ...items, ...items, ...items, ...items, ...items].map((item, index) => (
-            <div key={index} className="flex items-center gap-6 group transition-all duration-500">
-              <div className="relative w-10 h-10 flex items-center justify-center bg-white/5 rounded-full p-2 group-hover:bg-white/10 transition-colors border border-white/10 overflow-hidden">
-                <img 
-                  src={item.logo || "/placeholder.svg"} 
-                  alt={item.name} 
-                  className="h-6 w-auto brightness-0 invert opacity-60 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110" 
-                />
-              </div>
-              <span className="text-white/40 font-serif italic text-3xl tracking-widest group-hover:text-white transition-all duration-500">
+    <div className="w-full relative py-8">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-48 bg-black -rotate-[3deg] z-0 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border-y border-white/10" />
+      
+      <div className="relative z-10 overflow-hidden py-12 select-none">
+        <div className="flex items-center gap-32 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
+          {[...items, ...items, ...items].map((item, index) => (
+            <div key={index} className="flex items-center gap-8 group">
+              <img 
+                src={item.logo} 
+                alt={item.name} 
+                className="h-10 w-auto brightness-0 invert opacity-40 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0" 
+              />
+              <span className="text-white/30 font-sans font-bold text-4xl tracking-tighter group-hover:text-white transition-all duration-500">
                 {item.name}
               </span>
             </div>
