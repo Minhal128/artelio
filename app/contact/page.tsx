@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
+import { Skiper39 } from "@/components/ui/crowd-canvas"
 
 export default function ContactPage() {
   const containerVariants = {
@@ -139,6 +140,11 @@ export default function ContactPage() {
             </form>
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* Crowd Canvas Section */}
+      <div className="w-full h-[600px] mt-20 relative border-t border-black/5 overflow-hidden">
+        <Skiper39 />
       </div>
 
       {/* Decorative Elements */}
