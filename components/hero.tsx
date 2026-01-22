@@ -59,27 +59,27 @@ export function Hero() {
   }
 
   return (
-    <section className="relative flex flex-col items-center text-center pt-24 pb-16 px-4 max-w-7xl mx-auto overflow-hidden">
+    <section className="relative flex flex-col items-center text-center pt-20 pb-12 px-4 max-w-7xl mx-auto overflow-hidden">
       {/* Abstract Splashes */}
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        className="absolute -top-20 -left-20 w-96 h-96 bg-primary rounded-full blur-[100px] pointer-events-none"
+        className="absolute -top-10 -left-10 w-96 h-96 bg-primary rounded-full blur-[110px] pointer-events-none opacity-20"
       />
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        transition={{ delay: 0.5, duration: 2.5 }}
-        className="absolute top-1/4 -right-20 w-[400px] h-[400px] bg-primary/40 rounded-full blur-[120px] pointer-events-none"
+        transition={{ delay: 0.4, duration: 2.2 }}
+        className="absolute top-1/4 -right-10 w-[400px] h-[400px] bg-primary/50 rounded-full blur-[130px] pointer-events-none opacity-25"
       />
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        transition={{ delay: 1, duration: 3 }}
-        className="absolute bottom-0 left-1/4 w-80 h-80 bg-primary/20 rounded-full blur-[80px] pointer-events-none"
+        transition={{ delay: 0.8, duration: 2.8 }}
+        className="absolute bottom-10 left-1/4 w-80 h-80 bg-primary/30 rounded-full blur-[90px] pointer-events-none opacity-20"
       />
 
       {/* Hero Content */}
@@ -91,7 +91,7 @@ export function Hero() {
       >
         <motion.h1
           variants={itemVariants}
-          className="font-serif text-5xl md:text-7xl lg:text-8xl font-medium tracking-tight leading-[1.1] mb-6 max-w-4xl"
+          className="font-serif text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-[1.1] mb-4 max-w-4xl"
         >
           Discover{" "}
           <span className="relative inline-block italic">
@@ -119,34 +119,18 @@ export function Hero() {
           <span className="text-primary">Speaks</span> to You
         </motion.h1>
 
-        <motion.p
-          variants={itemVariants}
-          className="text-muted-foreground text-base md:text-lg max-w-2xl mb-8 leading-relaxed font-light"
-        >
-          Explore a curated collection of contemporary and classic art pieces that inspire, provoke, and captivate.
-        </motion.p>
-
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 mb-16">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-white rounded-full px-10 py-6 text-lg font-medium shadow-xl transition-all hover:scale-105 active:scale-95"
+          <motion.p
+            variants={itemVariants}
+            className="text-muted-foreground text-base md:text-lg max-w-2xl mb-8 leading-relaxed font-light"
           >
-            Explore the Gallery
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-primary/20 hover:bg-primary/5 rounded-full px-10 py-6 text-lg font-medium transition-all"
-          >
-            View Collections
-          </Button>
-        </motion.div>
+            Explore a curated collection of contemporary and classic art pieces that inspire, provoke, and captivate.
+          </motion.p>
 
-        {/* Integrated Image Grid */}
-        <motion.div 
-          variants={itemVariants}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full px-4"
-        >
+          {/* Integrated Image Grid */}
+          <motion.div 
+            variants={itemVariants}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 w-full px-4"
+          >
           {images.map((img, idx) => (
             <div
               key={idx}
