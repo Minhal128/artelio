@@ -116,63 +116,65 @@ export function Collections() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative h-screen w-full overflow-hidden bg-[#DCD7CC]"
+      className="relative h-screen w-full overflow-hidden bg-white flex items-center justify-center p-4 md:p-10"
     >
-      {/* "Our Collections" Header - Top Left */}
-      <div className="absolute top-16 left-16 z-50">
-        <h2 className="font-serif text-8xl md:text-[10rem] tracking-tighter text-black leading-[0.8]">
-          Our Collections
-        </h2>
-      </div>
+      <div className="relative w-full h-full max-h-[850px] max-w-[1600px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner">
+        {/* "Our Collections" Header - Top Left */}
+        <div className="absolute top-12 left-12 z-0">
+          <h2 className="font-serif text-8xl md:text-[12rem] tracking-tighter text-black leading-[0.75]">
+            Our<br />Collections
+          </h2>
+        </div>
 
-      {/* Dynamic Category Title - Bottom Left */}
-      <div className="absolute bottom-16 left-16 z-50 h-[120px] md:h-[160px] overflow-hidden">
-        {collectionCards.map((card, i) => (
-          <div
-            key={`cat-${card.id}`}
-            ref={(el) => { categoryRefs.current[i] = el }}
-            className="absolute bottom-0 left-0 whitespace-nowrap"
-          >
-            <h3 className="font-serif italic text-6xl md:text-9xl text-black/80">
-              {card.category}
-            </h3>
-          </div>
-        ))}
-      </div>
-
-      {/* Cards Container - Aligned to Right */}
-      <div className="relative h-full w-full flex items-center justify-end pr-[10%] lg:pr-[15%]">
-        <div className="relative w-[70vw] sm:w-[45vw] md:w-[35vw] lg:w-[30vw] h-[65vh] md:h-[75vh]">
+        {/* Dynamic Category Title - Bottom Left */}
+        <div className="absolute bottom-16 left-16 z-0 h-[100px] md:h-[140px] overflow-hidden">
           {collectionCards.map((card, i) => (
-            <div 
-              key={card.id}
-              ref={(el) => { cardsRef.current[i] = el }}
-              className="absolute inset-0 h-full w-full rounded-xl overflow-hidden shadow-2xl bg-neutral-200"
+            <div
+              key={`cat-${card.id}`}
+              ref={(el) => { categoryRefs.current[i] = el }}
+              className="absolute bottom-0 left-0 whitespace-nowrap"
             >
-              <div className="relative h-full w-full group">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                
-                <div className="absolute bottom-12 left-10 right-10 text-white">
-                  <span className="text-[10px] uppercase tracking-[0.5em] font-bold mb-3 block opacity-90">
-                    {card.category}
-                  </span>
-                  <h4 className="font-serif text-3xl md:text-5xl leading-tight">
-                    {card.title}
-                  </h4>
-                </div>
-              </div>
+              <h3 className="font-serif italic text-5xl md:text-8xl text-black/90">
+                {card.category}
+              </h3>
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Subtle Background Pattern/Texture */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
+        {/* Cards Container - Aligned to Right */}
+        <div className="relative h-full w-full flex items-center justify-end pr-[8%] lg:pr-[12%]">
+          <div className="relative w-[65vw] sm:w-[40vw] md:w-[32vw] lg:w-[28vw] h-[60vh] md:h-[70vh]">
+            {collectionCards.map((card, i) => (
+              <div 
+                key={card.id}
+                ref={(el) => { cardsRef.current[i] = el }}
+                className="absolute inset-0 h-full w-full rounded-[32px] overflow-hidden shadow-2xl bg-neutral-200"
+              >
+                <div className="relative h-full w-full group">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
+                  
+                  <div className="absolute bottom-10 left-8 right-8 text-white">
+                    <span className="text-[10px] uppercase tracking-[0.5em] font-bold mb-2 block opacity-90">
+                      {card.category}
+                    </span>
+                    <h4 className="font-serif text-3xl md:text-4xl leading-tight">
+                      {card.title}
+                    </h4>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Subtle Background Pattern/Texture */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
+      </div>
     </section>
   );
 }
