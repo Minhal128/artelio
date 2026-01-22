@@ -119,35 +119,35 @@ export function Collections() {
     >
       <div className="relative w-full h-full max-h-[850px] max-w-[1600px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
         {/* Cards Container - Centered */}
-        <div className="relative h-full w-full flex items-center justify-center">
-          <div className="relative w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[35vw] h-[60vh] md:h-[70vh]">
-            {collectionCards.map((card, i) => (
-              <div 
-                key={card.id}
-                ref={(el) => { cardsRef.current[i] = el }}
-                className="absolute inset-0 h-full w-full rounded-[32px] overflow-hidden shadow-2xl bg-neutral-200"
-              >
-                <div className="relative h-full w-full group">
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-80" />
-                  
-                  <div className="absolute bottom-10 left-8 right-8 text-white">
-                    <span className="text-[10px] uppercase tracking-[0.5em] font-bold mb-2 block opacity-90">
-                      {card.category}
-                    </span>
-                    <h4 className="font-serif text-3xl md:text-4xl leading-tight">
-                      {card.title}
-                    </h4>
+          <div className="relative h-full w-full flex items-center justify-center">
+            <div className="relative w-[85%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[550px] aspect-[4/5] md:aspect-[0.85]">
+              {collectionCards.map((card, i) => (
+                <div 
+                  key={card.id}
+                  ref={(el) => { cardsRef.current[i] = el }}
+                  className="absolute inset-0 h-full w-full rounded-[40px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-neutral-200"
+                >
+                  <div className="relative h-full w-full group">
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+                    
+                    <div className="absolute bottom-12 left-10 right-10 text-white">
+                      <span className="text-[12px] uppercase tracking-[0.6em] font-black mb-4 block opacity-100 text-white/90">
+                        {card.category}
+                      </span>
+                      <h4 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
+                        {card.title}
+                      </h4>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
 
         {/* Subtle Background Pattern/Texture */}
         <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
