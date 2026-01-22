@@ -118,10 +118,10 @@ export function Hero() {
                   triggerOnHover
                   respectReducedMotion={true}
                   loop={false}
-                  loopDelay={0}
-                  className="text-primary"
-                  tag="span"
-                />
+                    loopDelay={0}
+                    className="text-primary inline-block font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight"
+                    tag="span"
+                  />
 
             </motion.h1>
 

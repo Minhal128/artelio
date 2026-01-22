@@ -394,11 +394,11 @@ const Shuffle: React.FC<ShuffleProps> = ({
     }
   );
 
-  const baseTw = 'inline-block whitespace-normal break-words will-change-transform uppercase text-2xl leading-none';
+  const baseTw = 'inline-block whitespace-normal break-words will-change-transform';
   const userHasFont = useMemo(() => className && /font[-[]/i.test(className), [className]);
 
   const fallbackFont = useMemo(
-    () => (userHasFont ? {} : { fontFamily: `'Press Start 2P', sans-serif` }),
+    () => (userHasFont ? {} : {}),
     [userHasFont]
   );
 
