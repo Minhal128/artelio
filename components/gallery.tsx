@@ -21,48 +21,48 @@ import { cn } from "@/lib/utils";
 const Gallery = () => {
   const images = [
     {
-      src: "/images/x.com/13.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=800&auto=format&fit=crop",
+      alt: "Floral Art Composition",
     },
     {
-      src: "/images/x.com/32.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=800&auto=format&fit=crop",
+      alt: "Avant-garde Fashion",
     },
     {
-      src: "/images/x.com/20.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=800&auto=format&fit=crop",
+      alt: "Abstract Expressionism",
     },
     {
-      src: "/images/x.com/21.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1501472312651-726afe119ff1?q=80&w=800&auto=format&fit=crop",
+      alt: "Contemporary Sculpture",
     },
     {
-      src: "/images/x.com/19.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1515405290399-6d6006f14068?q=80&w=800&auto=format&fit=crop",
+      alt: "Classical Artistic Study",
     },
     {
-      src: "/images/x.com/1.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=800&auto=format&fit=crop",
+      alt: "Modern Gallery Installation",
     },
     {
-      src: "/images/x.com/2.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop",
+      alt: "Fine Art Portrait",
     },
     {
-      src: "/images/x.com/3.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1492037766660-2a56f9eb3fcb?q=80&w=800&auto=format&fit=crop",
+      alt: "Architectural Symmetry",
     },
     {
-      src: "/images/x.com/4.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800&auto=format&fit=crop",
+      alt: "Digital Art Synthesis",
     },
     {
-      src: "/images/x.com/5.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1554188248-986adbb73be4?q=80&w=800&auto=format&fit=crop",
+      alt: "Minimalist Geometry",
     },
     {
-      src: "/images/x.com/6.jpeg",
-      alt: "Illustrations by my fav AarzooAly",
+      src: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?q=80&w=800&auto=format&fit=crop",
+      alt: "Creative Process",
     },
   ];
 
