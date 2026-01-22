@@ -112,7 +112,7 @@ export function PaymentGateways() {
     <section className="w-full bg-[#fdfaf3]">
       <div
         ref={targetRef}
-        className="relative box-border flex h-[150vh] items-center justify-center gap-[2vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
+        className="relative box-border flex h-[100vh] items-center justify-center gap-[2vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
       >
         <div
           className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black"
@@ -133,7 +133,7 @@ export function PaymentGateways() {
       </div>
       <div
         ref={targetRef2}
-        className="relative -mt-[50vh] box-border flex h-[150vh] flex-col items-center justify-center gap-[4vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
+        className="relative -mt-[40vh] box-border flex h-[100vh] flex-col items-center justify-center gap-[4vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
       >
         <div className="flex items-center justify-center gap-4 mb-8">
           <Bracket className="h-10 text-[#b3633d]" />

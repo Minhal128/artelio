@@ -5,7 +5,6 @@ import { About } from "@/components/about"
 import { Gallery } from "@/components/gallery"
 import { Collections } from "@/components/collections"
 import { PaymentGateways } from "@/components/payment-gateways"
-import { SocialConnect } from "@/components/social-connect"
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
       <Gallery />
       <Collections />
       <PaymentGateways />
-      <SocialConnect />
       <Footer />
     </main>
   )
