@@ -286,11 +286,6 @@ const CrowdCanvas = ({ src, rows = 15, cols = 7 }: CrowdCanvasProps) => {
 const Skiper39 = () => {
   return (
     <div className="relative h-[500px] w-full bg-[#fcf9f5] text-black overflow-hidden">
-      <div className="top-22 absolute left-1/2 grid -translate-x-1/2 content-start justify-items-center gap-6 text-center text-black z-20">
-        <span className="relative max-w-[12ch] text-xs uppercase leading-tight opacity-40 after:absolute after:left-1/2 after:top-full after:h-16 after:w-px after:bg-gradient-to-b after:from-[#fcf9f5] after:to-black after:content-['']">
-          Croud Canvas
-        </span>
-      </div>
       <div className="absolute bottom-0 h-full w-full">
         <CrowdCanvas src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/175711/open-peeps-sheet.png" rows={15} cols={7} />
       </div>
