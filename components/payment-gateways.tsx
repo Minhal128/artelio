@@ -114,8 +114,8 @@ export function PaymentGateways() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
-    damping: 30,
+    stiffness: 120,
+    damping: 25,
     restDelta: 0.001
   });
 
@@ -131,7 +131,7 @@ export function PaymentGateways() {
 
   return (
     <section className="w-full bg-[#fdfaf3] relative">
-      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[160vh] py-[15vh] overflow-hidden">
+      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[130vh] py-[10vh] overflow-hidden">
         <div
           className="w-full max-w-6xl text-center text-7xl md:text-9xl font-serif font-medium tracking-tighter text-black sticky top-[30vh]"
           style={{ perspective: "1200px" }}
