@@ -100,17 +100,21 @@ export function Hero() {
           <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
         </motion.div>
 
-            <motion.div variants={itemVariants} className="mb-6">
+            <motion.h1 
+              variants={itemVariants} 
+              className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl"
+            >
+              Defining the Future of Fine Art with{" "}
               <ScrambledText
                 radius={100}
                 duration={1.2}
                 speed={0.5}
                 scrambleChars=".:"
-                className="font-serif text-5xl md:text-7xl lg:text-9xl font-medium tracking-tighter leading-none text-black mx-auto"
+                className="text-primary"
               >
                 Artelio
               </ScrambledText>
-            </motion.div>
+            </motion.h1>
 
           <motion.p
             variants={itemVariants}
