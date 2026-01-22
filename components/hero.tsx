@@ -115,10 +115,10 @@ export function Hero() {
           </span>
         </motion.h1>
 
-        <motion.p
-          variants={itemVariants}
-          className="text-muted-foreground text-base md:text-lg max-w-3xl mb-4 leading-relaxed font-light"
-        >
+          <motion.p
+            variants={itemVariants}
+            className="text-black text-base md:text-lg max-w-3xl mb-4 leading-relaxed font-light"
+          >
           Where timeless masterpieces meet contemporary vision. Discover high-end art collections curated for the modern connoisseur.
         </motion.p>
 
