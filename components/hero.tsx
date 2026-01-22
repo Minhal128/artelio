@@ -160,20 +160,15 @@ export function LogoMarquee() {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-48 bg-black -rotate-[3deg] z-0 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border-y border-white/10" />
       
       <div className="relative z-10 overflow-hidden py-12 select-none">
-        <div className="flex items-center gap-32 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
-          {[...items, ...items, ...items].map((item, index) => (
-            <div key={index} className="flex items-center gap-8 group">
-              <img 
-                src={item.logo} 
-                alt={item.name} 
-                className="h-10 w-auto brightness-0 invert opacity-40 group-hover:opacity-100 transition-all duration-500 grayscale group-hover:grayscale-0" 
-              />
-              <span className="text-white/30 font-sans font-bold text-4xl tracking-tighter group-hover:text-white transition-all duration-500">
-                {item.name}
-              </span>
-            </div>
-          ))}
-        </div>
+          <div className="flex items-center gap-32 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
+            {[...items, ...items, ...items].map((item, index) => (
+              <div key={index} className="flex items-center gap-8 group">
+                <span className="text-white/30 font-sans font-bold text-4xl tracking-tighter group-hover:text-white transition-all duration-500 uppercase">
+                  {item.name}
+                </span>
+              </div>
+            ))}
+          </div>
       </div>
     </div>
   )

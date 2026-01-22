@@ -37,11 +37,11 @@ const StickyCard002 = ({
 
       if (!imageElements[0]) return;
 
-      gsap.set(imageElements[0], { y: "0%", scale: 1, rotation: 0 });
+      gsap.set(imageElements[0], { x: "0%", scale: 1, rotation: 0 });
 
       for (let i = 1; i < totalCards; i++) {
         if (!imageElements[i]) continue;
-        gsap.set(imageElements[i], { y: "100%", scale: 1, rotation: 0 });
+        gsap.set(imageElements[i], { x: "100%", scale: 1, rotation: 0 });
       }
 
       const scrollTimeline = gsap.timeline({
@@ -64,8 +64,8 @@ const StickyCard002 = ({
         scrollTimeline.to(
           currentImage,
           {
-            scale: 0.7,
-            rotation: 5,
+            scale: 0.8,
+            x: "-20%",
             duration: 1,
             ease: "none",
           },
@@ -75,7 +75,7 @@ const StickyCard002 = ({
         scrollTimeline.to(
           nextImage,
           {
-            y: "0%",
+            x: "0%",
             duration: 1,
             ease: "none",
           },
@@ -133,40 +133,40 @@ export function Collections() {
   const collectionCards = [
     {
       id: 1,
-      image: "https://images.unsplash.com/photo-1574169208507-84376144848b?q=80&w=1600&auto=format&fit=crop",
-      alt: "Vibrant Abstract",
+      image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1600&auto=format&fit=crop",
+      alt: "Classical Masterpiece",
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1600&auto=format&fit=crop",
-      alt: "Silk Textures",
+      image: "https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=1600&auto=format&fit=crop",
+      alt: "Modern Abstract",
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1600&auto=format&fit=crop",
-      alt: "Geometric Architecture",
+      image: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1600&auto=format&fit=crop",
+      alt: "Vibrant Color Field",
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1600&auto=format&fit=crop",
-      alt: "Scenic Landscape",
+      image: "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1600&auto=format&fit=crop",
+      alt: "Architectural Symmetry",
     },
     {
       id: 5,
       image: "https://images.unsplash.com/photo-1493333345807-68b2003d11d0?q=80&w=1600&auto=format&fit=crop",
-      alt: "Modern Interior",
+      alt: "Minimalist Geometry",
     },
   ];
 
   return (
-    <section className="bg-background overflow-hidden">
-      <div className="py-24 px-8 text-center bg-background relative z-10">
+    <section className="bg-background overflow-hidden min-h-screen flex flex-col">
+      <div className="py-24 px-8 text-center bg-background relative z-10 flex-shrink-0">
         <h2 className="font-serif text-5xl md:text-8xl mb-6 tracking-tighter text-primary">Our Collections</h2>
         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12">
           Curated excellence across fashion, art, and architecture.
         </p>
       </div>
-      <div className="w-full">
+      <div className="flex-grow w-full h-[80vh] min-h-[600px] relative">
         <StickyCard002 cards={collectionCards} />
       </div>
     </section>

@@ -3,33 +3,33 @@ import { Button } from "@/components/ui/button"
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-md">
-      <div className="flex items-center justify-between px-8 py-6 max-w-7xl mx-auto w-full">
-        <div className="flex gap-8 text-sm font-medium text-muted-foreground">
-          <Link href="#" className="text-foreground border-b-2 border-primary pb-0.5">
+    <nav className="sticky top-0 z-50 w-full bg-[#f5f1e8] border-b border-black/5">
+      <div className="flex items-center justify-between px-8 py-6 max-w-[1400px] mx-auto w-full relative">
+        <div className="flex gap-8 text-sm font-medium text-[#4a4a4a]">
+          <Link href="#" className="text-black border-b border-black pb-0.5 transition-all">
             Home
           </Link>
-          <Link href="#" className="hover:text-foreground transition-colors uppercase">
+          <Link href="#" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
             about
           </Link>
-          <Link href="#" className="hover:text-foreground transition-colors uppercase">
+          <Link href="#" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
             Shop
           </Link>
-          <Link href="#" className="hover:text-foreground transition-colors uppercase">
+          <Link href="#" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
             Stores
           </Link>
-          <Link href="#" className="hover:text-foreground transition-colors uppercase">
+          <Link href="#" className="hover:text-black transition-colors uppercase tracking-widest text-[11px]">
             Blog
           </Link>
         </div>
 
         <div className="absolute left-1/2 -translate-x-1/2">
-          <span className="font-serif text-3xl font-bold tracking-widest text-primary uppercase">Artelio</span>
+          <span className="font-serif text-4xl font-normal tracking-[0.2em] text-[#a67c52] uppercase">Artelio</span>
         </div>
 
         <Button
           variant="outline"
-          className="rounded-full border-primary/30 text-primary hover:bg-primary hover:text-white px-8 bg-transparent transition-all hover:scale-105"
+          className="rounded-full border-black/20 text-black hover:bg-black hover:text-white px-10 py-5 bg-transparent transition-all text-xs uppercase tracking-widest"
         >
           Login
         </Button>
