@@ -4,7 +4,6 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 
 export interface ScrambledTextProps {
   radius?: number
-  duration?: number
   scrambleChars?: string
   className?: string
   style?: React.CSSProperties
@@ -12,9 +11,8 @@ export interface ScrambledTextProps {
 }
 
 const ScrambledText: React.FC<ScrambledTextProps> = ({
-  radius = 100,
-  duration = 0.8,
-  scrambleChars = 'ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+',
+  radius = 120,
+  scrambleChars = '.:*#$@',
   className = '',
   style = {},
   children
@@ -22,80 +20,97 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
   const [displayText, setDisplayText] = useState(children)
   const rootRef = useRef<HTMLSpanElement | null>(null)
   const originalText = children
-  const isAnimating = useRef(false)
-  const animationFrameId = useRef<number | null>(null)
-  
   const chars = scrambleChars.split('')
   
-  const startAnimation = useCallback(() => {
-    if (isAnimating.current) return
-    isAnimating.current = true
-    
-    const startTime = performance.now()
-    const totalDuration = duration * 1000
+  const mousePos = useRef({ x: -1000, y: -1000 })
+  const isAnimating = useRef(false)
+  const revealProgress = useRef(1) // 1 = fully revealed, 0 = fully scrambled/scrambling
+  
+  const animate = useCallback(() => {
+    if (!rootRef.current) return
 
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime
-      const progress = Math.min(elapsed / totalDuration, 1)
+    const rect = rootRef.current.getBoundingClientRect()
+    const centerX = rect.left + rect.width / 2
+    const centerY = rect.top + rect.height / 2
+    const dist = Math.hypot(mousePos.current.x - centerX, mousePos.current.y - centerY)
 
+    const isWithinRadius = dist < radius
+
+    if (isWithinRadius) {
+      // Scrambling state
+      revealProgress.current = Math.max(0, revealProgress.current - 0.1)
+      
       const scrambled = originalText
         .split('')
-        .map((char, index) => {
+        .map((char) => {
           if (char === ' ') return ' '
-          
-          // Determine if this character should be revealed
-          const charProgress = (index / originalText.length) * 0.5
-          if (progress > 0.5 + charProgress) {
-            return originalText[index]
-          }
-          
           return chars[Math.floor(Math.random() * chars.length)]
         })
         .join('')
-
+      
       setDisplayText(scrambled)
-
-      if (progress < 1) {
-        animationFrameId.current = requestAnimationFrame(animate)
+      requestAnimationFrame(animate)
+    } else {
+      // Reveal state
+      if (revealProgress.current < 1) {
+        revealProgress.current += 0.08 // Control reveal speed
+        
+        const currentProgress = revealProgress.current
+        const scrambled = originalText
+          .split('')
+          .map((char, index) => {
+            if (char === ' ') return ' '
+            
+            // Randomly decide to reveal based on progress
+            // We use a threshold that increases with progress
+            const threshold = index / originalText.length
+            if (currentProgress > threshold * 0.8 + 0.2) {
+              return char
+            }
+            
+            return chars[Math.floor(Math.random() * chars.length)]
+          })
+          .join('')
+        
+        setDisplayText(scrambled)
+        requestAnimationFrame(animate)
       } else {
         setDisplayText(originalText)
         isAnimating.current = false
       }
     }
-
-    animationFrameId.current = requestAnimationFrame(animate)
-  }, [originalText, chars, duration])
+  }, [originalText, chars, radius])
 
   useEffect(() => {
     const handleMove = (e: PointerEvent) => {
-      if (!rootRef.current || isAnimating.current) return
+      mousePos.current = { x: e.clientX, y: e.clientY }
       
+      if (!rootRef.current) return
       const rect = rootRef.current.getBoundingClientRect()
       const centerX = rect.left + rect.width / 2
       const centerY = rect.top + rect.height / 2
-      
       const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY)
 
-      if (dist < radius) {
-        startAnimation()
+      if (dist < radius && !isAnimating.current) {
+        isAnimating.current = true
+        requestAnimationFrame(animate)
       }
     }
 
     window.addEventListener('pointermove', handleMove)
     return () => {
       window.removeEventListener('pointermove', handleMove)
-      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current)
     }
-  }, [radius, startAnimation])
+  }, [radius, animate])
 
   return (
     <span
       ref={rootRef}
-      className={`inline-block whitespace-pre transition-colors duration-300 ${className}`}
+      className={`inline-block whitespace-pre transition-colors duration-300 select-none ${className}`}
       style={{ 
         ...style,
-        minWidth: `${originalText.length}ch`, // Help maintain layout
-        fontVariantNumeric: 'tabular-nums' // Ensure numbers don't shift
+        minWidth: `${originalText.length}ch`,
+        fontVariantNumeric: 'tabular-nums'
       }}
     >
       {displayText}

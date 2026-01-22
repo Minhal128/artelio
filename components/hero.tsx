@@ -105,14 +105,13 @@ export function Hero() {
               className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl text-foreground"
             >
               Defining the Future of Fine Art with{" "}
-              <ScrambledText
-                radius={120}
-                duration={0.6}
-                scrambleChars=".:*#$@"
-                className="text-primary"
-              >
-                Artelio
-              </ScrambledText>
+                <ScrambledText
+                  radius={120}
+                  scrambleChars=".:*#$@"
+                  className="text-primary"
+                >
+                  Artelio
+                </ScrambledText>
             </motion.h1>
 
           <motion.p
