@@ -30,10 +30,11 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   const [spacing, setSpacing] = useState(0);
   const [offset, setOffset] = useState(0);
   const uid = useId();
-  const pathId = `curve-${uid}`;
-  const pathD = `M-100,40 Q500,${40 + curveAmount} 1540,40`;
+    const pathId = `curve-${uid}`;
+    const pathD = `M-100,100 Q720,${100 + curveAmount} 1540,100`;
 
-  const dragRef = useRef(false);
+    const dragRef = useRef(false);
+
   const lastXRef = useRef(0);
   const dirRef = useRef<'left' | 'right'>(direction);
   const velRef = useRef(0);
@@ -119,8 +120,8 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
       onPointerLeave={endDrag}
     >
       <svg
-        className="select-none w-full overflow-visible block aspect-[1440/120] text-[6rem] font-bold uppercase leading-none"
-        viewBox="0 0 1440 120"
+        className="select-none w-full overflow-visible block aspect-[1440/500] text-[6rem] font-bold uppercase leading-none"
+        viewBox="0 0 1440 500"
       >
         <text ref={measureRef} xmlSpace="preserve" style={{ visibility: 'hidden', opacity: 0, pointerEvents: 'none' }}>
           {text}
@@ -129,7 +130,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
           <path ref={pathRef} id={pathId} d={pathD} fill="none" stroke="transparent" />
         </defs>
         {ready && (
-          <text xmlSpace="preserve" className={`fill-current opacity-10 ${className ?? ''}`}>
+          <text xmlSpace="preserve" className={`fill-current ${className ?? ''}`}>
             <textPath ref={textPathRef} href={`#${pathId}`} startOffset={offset + 'px'} xmlSpace="preserve">
               {totalText}
             </textPath>

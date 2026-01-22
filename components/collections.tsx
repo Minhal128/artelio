@@ -74,9 +74,10 @@ export function Collections() {
     cards.forEach((card, i) => {
       gsap.set(card, {
         zIndex: totalCards - i,
-        scale: 1 - i * 0.05,
-        y: i * 20,
-        opacity: i < 3 ? 1 : 0, // Only show top 3 for cleaner stack
+        scale: 1 - i * 0.04,
+        y: i * 15,
+        rotate: i * -1,
+        opacity: i < 5 ? 1 : 0, // Show more cards in the stack
       });
     });
 
@@ -95,20 +96,21 @@ export function Collections() {
       if (i < totalCards - 1) {
         // Top card moves UP and OUT
         tl.to(card, {
-          y: "-150%",
+          y: "-120%",
+          x: "-10%",
           opacity: 0,
-          rotate: i % 2 === 0 ? -10 : 10,
+          rotate: -15,
           duration: 1,
           ease: "power2.inOut",
         }, i);
 
-        // Cards behind move FORWARD
+        // Cards behind move FORWARD to fill the gap
         cards.slice(i + 1).forEach((nextCard, nextIndex) => {
-          const relativeIndex = nextIndex; // index relative to the new top
           tl.to(nextCard, {
-            scale: 1 - relativeIndex * 0.05,
-            y: relativeIndex * 20,
-            opacity: relativeIndex < 3 ? 1 : 0,
+            scale: 1 - nextIndex * 0.04,
+            y: nextIndex * 15,
+            rotate: nextIndex * -1,
+            opacity: nextIndex < 5 ? 1 : 0,
             duration: 1,
             ease: "power2.inOut",
           }, i);
@@ -128,15 +130,16 @@ export function Collections() {
     >
       <div className="relative w-full h-full max-h-[600px] max-w-[1200px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
         
-        {/* Background Decorative Element */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center">
-           <CurvedLoop 
-              marqueeText="OUR EXCLUSIVE COLLECTIONS ✦ ARTELIO ✦ EST 2026 ✦ CURATED PIECES ✦ "
-              speed={1.5}
-              curveAmount={300}
-              className="text-black/5"
-            />
-        </div>
+          {/* Background Decorative Element */}
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+             <CurvedLoop 
+                marqueeText="OUR EXCLUSIVE COLLECTIONS ✦ ARTELIO ✦ EST 2026 ✦ CURATED PIECES ✦ "
+                speed={1.5}
+                curveAmount={250}
+                className="text-black/[0.07]"
+              />
+          </div>
+
 
         {/* Cards Container - Centered */}
         <div className="relative z-10 h-full w-full flex items-center justify-center">
