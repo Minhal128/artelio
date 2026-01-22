@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-export function Navbar() {
+export function Navbar({ showAppointment = true }: { showAppointment?: boolean }) {
   const pathname = usePathname()
 
     const navLinks = [
@@ -52,12 +52,14 @@ export function Navbar() {
           </Link>
         </div>
 
-        <Button
-          variant="outline"
-          className="rounded-full border-black/20 text-black hover:bg-black hover:text-white px-10 py-5 bg-transparent transition-all text-xs uppercase tracking-widest"
-        >
-          Appointment
-        </Button>
+        {showAppointment && (
+          <Button
+            variant="outline"
+            className="rounded-full border-black/20 text-black hover:bg-black hover:text-white px-10 py-5 bg-transparent transition-all text-xs uppercase tracking-widest"
+          >
+            Appointment
+          </Button>
+        )}
       </div>
     </nav>
   )

@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Skiper39 } from "@/components/ui/crowd-canvas";
+import { Navbar } from "@/components/navbar";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -66,7 +67,9 @@ export default function ContactPage() {
   }
 
     return (
-    <div className="relative min-h-screen bg-[#fcf9f5] selection:bg-orange-100 selection:text-orange-900 overflow-hidden pt-24">
+    <>
+      <Navbar showAppointment={false} />
+      <div className="relative min-h-screen bg-[#fcf9f5] selection:bg-orange-100 selection:text-orange-900 overflow-hidden pt-24">
       {/* Background Texture - More subtle and warm */}
       <div className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
       
