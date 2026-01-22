@@ -20,16 +20,16 @@ const CharacterV1 = ({
   const isSpace = char === " ";
   const distanceFromCenter = index - centerIndex;
 
-  const x = useTransform(
-    progress,
-    [0, 0.5],
-    [distanceFromCenter * 50, 0],
-  );
-  const rotateX = useTransform(
-    progress,
-    [0, 0.5],
-    [distanceFromCenter * 50, 0],
-  );
+    const x = useTransform(
+      progress,
+      [0, 0.4],
+      [distanceFromCenter * 50, 0],
+    );
+    const rotateX = useTransform(
+      progress,
+      [0, 0.4],
+      [distanceFromCenter * 50, 0],
+    );
 
   return (
     <motion.span
@@ -55,22 +55,22 @@ const CharacterV3 = ({
 
     const x = useTransform(
       progress,
-      [0.1, 0.9],
+      [0.1, 0.45],
       [distanceFromCenter * 120, 0],
     );
     const rotate = useTransform(
       progress,
-      [0.1, 0.9],
+      [0.1, 0.45],
       [distanceFromCenter * 60, 0],
     );
   
     const y = useTransform(
       progress,
-      [0.1, 0.9],
+      [0.1, 0.45],
       [-Math.abs(distanceFromCenter) * 30, 0],
     );
-    const scale = useTransform(progress, [0.1, 0.9], [0.6, 1]);
-    const opacity = useTransform(progress, [0.1, 0.2, 0.9], [0, 1, 1]);
+    const scale = useTransform(progress, [0.1, 0.45], [0.6, 1]);
+    const opacity = useTransform(progress, [0.1, 0.2, 0.45], [0, 1, 1]);
 
   return (
     <motion.img
@@ -131,9 +131,9 @@ export function PaymentGateways() {
 
   return (
     <section className="w-full bg-[#fdfaf3] relative">
-      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[130vh] py-[10vh] overflow-hidden">
+      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[105vh] py-[5vh] overflow-hidden">
         <div
-          className="w-full max-w-6xl text-center text-7xl md:text-9xl font-serif font-medium tracking-tighter text-black sticky top-[30vh]"
+          className="w-full max-w-6xl text-center text-7xl md:text-9xl font-serif font-medium tracking-tighter text-black sticky top-[35vh]"
           style={{ perspective: "1200px" }}
         >
           {characters.map((char, index) => (
@@ -147,13 +147,13 @@ export function PaymentGateways() {
           ))}
         </div>
 
-        <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[25vh] z-10">
+        <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[20vh] z-10">
           <motion.div 
             style={{ 
-              opacity: useTransform(smoothProgress, [0.1, 0.3], [0, 0.8]),
-              y: useTransform(smoothProgress, [0.1, 0.3], [20, 0])
+              opacity: useTransform(smoothProgress, [0.05, 0.25], [0, 0.8]),
+              y: useTransform(smoothProgress, [0.05, 0.25], [20, 0])
             }}
-            className="flex items-center justify-center gap-4 mb-16"
+            className="flex items-center justify-center gap-4 mb-12"
           >
             <Bracket className="h-10 text-[#b3633d]" />
             <span className="font-serif text-3xl font-light text-black/90 italic">
