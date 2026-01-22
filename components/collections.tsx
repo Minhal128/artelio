@@ -42,6 +42,7 @@ const collectionCards = [
 export function Collections() {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const categoryRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -49,17 +50,21 @@ export function Collections() {
     if (!sectionRef.current) return;
 
     const cards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
+    const categoryElements = categoryRefs.current.filter((el): el is HTMLDivElement => el !== null);
     const totalCards = cards.length;
 
-    // Initial state
-    gsap.set(cards, { x: "100%", y: "0%" });
-    gsap.set(cards[0], { x: "0%", y: "0%" });
+    // Initial state: first card visible, others hidden to the right
+    gsap.set(cards, { x: "100%", y: "0%", opacity: 0 });
+    gsap.set(cards[0], { x: "0%", y: "0%", opacity: 1 });
+    
+    gsap.set(categoryElements, { y: 100, opacity: 0 });
+    gsap.set(categoryElements[0], { y: 0, opacity: 1 });
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: `+=${window.innerHeight * totalCards}`,
+        end: `+=${window.innerHeight * totalCards * 2}`,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
@@ -67,29 +72,39 @@ export function Collections() {
     });
 
     cards.forEach((card, i) => {
-      if (i === 0) {
-        // First card only moves UP
+      const isLast = i === totalCards - 1;
+      
+      // Step 1: Bring card in from RIGHT (if not first)
+      if (i > 0) {
         tl.to(card, {
-          y: "-100%",
+          x: "0%",
+          opacity: 1,
           duration: 1,
           ease: "power2.inOut",
-        }, i);
-      } else {
-        // Subsequent cards: Come from RIGHT to CENTER
-        tl.fromTo(card, 
-          { x: "100%", y: "0%" },
-          { x: "0%", y: "0%", duration: 1, ease: "power2.inOut" },
-          i - 1 // Start as previous card moves up
-        );
+        }, i * 2 - 0.5);
 
-        // Then move UP to exit (except the last card stays if needed, but usually all exit)
-        if (i < totalCards - 1) {
-          tl.to(card, {
-            y: "-100%",
-            duration: 1,
-            ease: "power2.inOut",
-          }, i);
-        }
+        tl.to(categoryElements[i], {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        }, i * 2);
+      }
+
+      // Step 2: Move card UP to exit (if not last)
+      if (!isLast) {
+        tl.to(card, {
+          y: "-120%",
+          duration: 1,
+          ease: "power2.inOut",
+        }, i * 2 + 1);
+
+        tl.to(categoryElements[i], {
+          y: -100,
+          opacity: 0,
+          duration: 0.5,
+          ease: "power2.in",
+        }, i * 2 + 1);
       }
     });
 
@@ -101,46 +116,63 @@ export function Collections() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative h-screen w-full overflow-hidden bg-black"
+      className="relative h-screen w-full overflow-hidden bg-[#DCD7CC]"
     >
-      <div className="absolute top-12 left-12 z-50 pointer-events-none">
-        <h2 className="font-serif text-5xl md:text-8xl tracking-tighter text-white mix-blend-difference">
+      {/* "Our Collections" Header - Top Left */}
+      <div className="absolute top-16 left-16 z-50">
+        <h2 className="font-serif text-8xl md:text-[10rem] tracking-tighter text-black leading-[0.8]">
           Our Collections
         </h2>
       </div>
 
-      <div className="relative h-full w-full">
+      {/* Dynamic Category Title - Bottom Left */}
+      <div className="absolute bottom-16 left-16 z-50 h-[120px] md:h-[160px] overflow-hidden">
         {collectionCards.map((card, i) => (
-          <div 
-            key={card.id}
-            ref={(el) => { cardsRef.current[i] = el }}
-            className="absolute inset-0 h-full w-full overflow-hidden"
+          <div
+            key={`cat-${card.id}`}
+            ref={(el) => { categoryRefs.current[i] = el }}
+            className="absolute bottom-0 left-0 whitespace-nowrap"
           >
-            <div className="relative h-full w-full">
-              <img
-                src={card.image}
-                alt={card.title}
-                className="h-full w-full object-cover scale-110" // scale-110 for a bit of zoom room
-              />
-              <div className="absolute inset-0 bg-black/40" />
-              <div className="absolute bottom-24 left-12 right-12 z-10 text-white">
-                <div className="max-w-4xl">
-                  <span className="text-sm uppercase tracking-[0.5em] font-bold mb-4 block opacity-70">
-                    {card.category}
-                  </span>
-                  <h3 className="font-serif text-6xl md:text-9xl leading-tight mb-8">
-                    {card.title}
-                  </h3>
-                  <div className="h-[1px] w-32 bg-white/50 mb-8" />
-                  <p className="text-lg md:text-xl font-light opacity-80 max-w-xl">
-                    Discover the essence of modern architectural beauty and abstract expressionism in our latest curated series.
-                  </p>
-                </div>
-              </div>
-            </div>
+            <h3 className="font-serif italic text-6xl md:text-9xl text-black/80">
+              {card.category}
+            </h3>
           </div>
         ))}
       </div>
+
+      {/* Cards Container - Aligned to Right */}
+      <div className="relative h-full w-full flex items-center justify-end pr-[10%] lg:pr-[15%]">
+        <div className="relative w-[70vw] sm:w-[45vw] md:w-[35vw] lg:w-[30vw] h-[65vh] md:h-[75vh]">
+          {collectionCards.map((card, i) => (
+            <div 
+              key={card.id}
+              ref={(el) => { cardsRef.current[i] = el }}
+              className="absolute inset-0 h-full w-full rounded-xl overflow-hidden shadow-2xl bg-neutral-200"
+            >
+              <div className="relative h-full w-full group">
+                <img
+                  src={card.image}
+                  alt={card.title}
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                
+                <div className="absolute bottom-12 left-10 right-10 text-white">
+                  <span className="text-[10px] uppercase tracking-[0.5em] font-bold mb-3 block opacity-90">
+                    {card.category}
+                  </span>
+                  <h4 className="font-serif text-3xl md:text-5xl leading-tight">
+                    {card.title}
+                  </h4>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Subtle Background Pattern/Texture */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
     </section>
   );
 }
