@@ -18,7 +18,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -78,112 +77,124 @@ export default function ContactPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          className="max-w-6xl mx-auto"
         >
           <div className="text-center mb-16">
-            <h1 className="text-5xl md:text-7xl font-serif font-medium text-black mb-4">
+            <h1 className="text-6xl md:text-8xl font-serif font-medium text-black mb-6">
               Contact Us
             </h1>
-            <p className="text-xl text-black/60 font-light max-w-2xl mx-auto italic">
-              Have a question or want to work together? Drop us a message and we'll get back to you shortly.
+            <p className="text-xl md:text-2xl text-black/60 font-light max-w-3xl mx-auto italic">
+              Have a question or want to work together? Drop us a message and we'll
+              get back to you shortly.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            <div className="md:col-span-1 space-y-8 bg-white/30 backdrop-blur-md p-6 rounded-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+            {/* Contact Info */}
+            <div className="md:col-span-4 space-y-12 bg-white/20 backdrop-blur-xl p-10 rounded-[2rem] border border-white/20">
               <div>
-                <h3 className="text-xl font-serif font-medium text-black mb-2">Email</h3>
-                <p className="text-black/60">artelio512@gmail.com</p>
+                <h3 className="text-2xl font-serif font-medium text-black mb-3">Email</h3>
+                <p className="text-lg text-black/60">artelio512@gmail.com</p>
               </div>
               <div>
-                <h3 className="text-xl font-serif font-medium text-black mb-2">Support</h3>
-                <p className="text-black/60">Available 24/7 for our premium partners.</p>
+                <h3 className="text-2xl font-serif font-medium text-black mb-3">Support</h3>
+                <p className="text-lg text-black/60">Available 24/7 for our premium partners.</p>
               </div>
               <div>
-                <h3 className="text-xl font-serif font-medium text-black mb-2">Location</h3>
-                <p className="text-black/60">Global / Remote</p>
+                <h3 className="text-2xl font-serif font-medium text-black mb-3">Location</h3>
+                <p className="text-lg text-black/60">Global / Remote</p>
               </div>
             </div>
 
-            <Card className="md:col-span-2 border-none bg-white/40 backdrop-blur-md shadow-2xl shadow-black/5">
-              <CardHeader>
-                <CardTitle className="font-serif text-2xl">Send a Message</CardTitle>
-                <CardDescription>
-                  Fill out the form below and our team will reach out to you.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Name</FormLabel>
-                            <FormControl>
-                              <Input placeholder="John Doe" {...field} className="bg-white/80" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      <FormField
-                        control={form.control}
-                        name="email"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Email</FormLabel>
-                            <FormControl>
-                              <Input placeholder="john@example.com" {...field} className="bg-white/80" />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                    </div>
+            {/* Form */}
+            <div className="md:col-span-8 bg-white/30 backdrop-blur-xl p-10 rounded-[2rem] border border-white/20 shadow-2xl shadow-black/5">
+              <div className="mb-8">
+                <h2 className="text-3xl font-serif font-medium text-black mb-2">Send a Message</h2>
+                <p className="text-black/60">Fill out the form below and our team will reach out to you.</p>
+              </div>
+
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <FormField
                       control={form.control}
-                      name="subject"
+                      name="name"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Subject</FormLabel>
+                          <FormLabel className="text-black font-medium">Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="How can we help?" {...field} className="bg-white/80" />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Message</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Tell us more about your project..."
-                              className="min-h-[150px] bg-white/80"
-                              {...field}
+                            <Input 
+                              placeholder="John Doe" 
+                              {...field} 
+                              className="bg-white/50 border-white/40 h-12 focus:bg-white transition-all" 
                             />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
-                    <Button
-                      type="submit"
-                      className="w-full bg-[#b3633d] hover:bg-[#a05634] text-white py-6 text-lg rounded-none transition-colors"
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? "Sending..." : "Send Message"}
-                    </Button>
-                  </form>
-                </Form>
-              </CardContent>
-            </Card>
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-black font-medium">Email</FormLabel>
+                          <FormControl>
+                            <Input 
+                              placeholder="john@example.com" 
+                              {...field} 
+                              className="bg-white/50 border-white/40 h-12 focus:bg-white transition-all" 
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <FormField
+                    control={form.control}
+                    name="subject"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-black font-medium">Subject</FormLabel>
+                        <FormControl>
+                          <Input 
+                            placeholder="How can we help?" 
+                            {...field} 
+                            className="bg-white/50 border-white/40 h-12 focus:bg-white transition-all" 
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-black font-medium">Message</FormLabel>
+                        <FormControl>
+                          <Textarea
+                            placeholder="Tell us more about your project..."
+                            className="min-h-[150px] bg-white/50 border-white/40 focus:bg-white transition-all resize-none"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full bg-black hover:bg-black/90 text-white h-14 text-lg rounded-xl transition-all font-medium"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              </Form>
+            </div>
           </div>
         </motion.div>
       </div>
