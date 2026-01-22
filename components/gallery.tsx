@@ -21,30 +21,51 @@ import { cn } from "@/lib/utils";
 const Gallery = () => {
   const images = [
     {
-      src: "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/13.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
     {
-      src: "https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/32.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
     {
-      src: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/20.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
     {
-      src: "https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/21.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
     {
-      src: "https://images.unsplash.com/photo-1576733220427-024833a6955a?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/19.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
     {
-      src: "https://images.unsplash.com/photo-1547891301-158ec3931efa?q=80&w=2000&auto=format&fit=crop",
+      src: "/images/x.com/1.jpeg",
+      alt: "Illustrations by my fav AarzooAly",
+    },
+    {
+      src: "/images/x.com/2.jpeg",
+      alt: "Illustrations by my fav AarzooAly",
+    },
+    {
+      src: "/images/x.com/3.jpeg",
+      alt: "Illustrations by my fav AarzooAly",
+    },
+    {
+      src: "/images/x.com/4.jpeg",
+      alt: "Illustrations by my fav AarzooAly",
+    },
+    {
+      src: "/images/x.com/5.jpeg",
+      alt: "Illustrations by my fav AarzooAly",
+    },
+    {
+      src: "/images/x.com/6.jpeg",
       alt: "Illustrations by my fav AarzooAly",
     },
   ];
+
 
   return (
     <section className="py-24 bg-[#f5f4f3]">
@@ -80,7 +101,7 @@ const Gallery = () => {
           </motion.p>
         </div>
         <div className="flex h-full w-full items-center justify-center overflow-hidden">
-          <Carousel_003 className="" images={images} showPagination loop />
+          <Carousel_003 className="" images={images} showPagination loop autoplay />
         </div>
       </div>
     </section>
@@ -113,14 +134,19 @@ const Carousel_003 = ({
     padding-bottom: 50px !important;
   }
   
-  .Carousal_003 .swiper-slide {
-    background-position: center;
-    background-size: cover;
-    width: 350px;
-    height: 400px;
-  }
+    .Carousal_003 .swiper-slide {
+      background-position: center;
+      background-size: cover;
+      width: 350px;
+      height: 400px;
+    }
 
-  .swiper-pagination-bullet {
+    .Carousal_003 .swiper-wrapper {
+      transition-timing-function: linear !important;
+    }
+
+    .swiper-pagination-bullet {
+
     background-color: #000 !important;
   }
 `;
@@ -147,11 +173,12 @@ const Carousel_003 = ({
           autoplay={
             autoplay
               ? {
-                  delay: 1500,
-                  disableOnInteraction: true,
+                  delay: 0,
+                  disableOnInteraction: false,
                 }
               : false
           }
+          speed={5000}
           effect="coverflow"
           grabCursor={true}
           slidesPerView="auto"
