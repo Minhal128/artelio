@@ -117,10 +117,10 @@ export function Collections() {
       ref={sectionRef} 
       className="relative h-screen w-full overflow-hidden bg-white flex items-center justify-center p-4 md:p-10"
     >
-      <div className="relative w-full h-full max-h-[850px] max-w-[1600px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
-        {/* Cards Container - Centered */}
-          <div className="relative h-full w-full flex items-center justify-center">
-            <div className="relative w-[85%] sm:w-[70%] md:w-[60%] lg:w-[45%] max-w-[550px] aspect-[4/5] md:aspect-[0.85]">
+    <div className="relative w-full h-full max-h-[600px] max-w-[1200px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
+      {/* Cards Container - Centered */}
+        <div className="relative h-full w-full flex items-center justify-center">
+          <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[50%] max-w-[700px] aspect-[1.6] md:aspect-[1.6]">
               {collectionCards.map((card, i) => (
                 <div 
                   key={card.id}
