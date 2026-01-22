@@ -38,8 +38,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geist.variable} ${geistMono.variable} ${playfair.variable} font-sans antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${geist.variable} ${geistMono.variable} ${playfair.variable} font-sans antialiased`} suppressHydrationWarning>
         <LenisProvider>
           {children}
         </LenisProvider>
