@@ -106,9 +106,8 @@ export function Hero() {
             >
               Defining the Future of Fine Art with{" "}
               <ScrambledText
-                radius={100}
-                duration={1.2}
-                speed={0.5}
+                radius={120}
+                duration={0.6}
                 scrambleChars=".:*#$@"
                 className="text-primary"
               >

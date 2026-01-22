@@ -5,7 +5,6 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 export interface ScrambledTextProps {
   radius?: number
   duration?: number
-  speed?: number
   scrambleChars?: string
   className?: string
   style?: React.CSSProperties
@@ -14,9 +13,8 @@ export interface ScrambledTextProps {
 
 const ScrambledText: React.FC<ScrambledTextProps> = ({
   radius = 100,
-  duration = 1.2,
-  speed = 0.5,
-  scrambleChars = '.:*#$@',
+  duration = 0.8,
+  scrambleChars = 'ABCDEFGHJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+',
   className = '',
   style = {},
   children
@@ -24,69 +22,81 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
   const [displayText, setDisplayText] = useState(children)
   const rootRef = useRef<HTMLSpanElement | null>(null)
   const originalText = children
-  const isScrambling = useRef(false)
-  const timeoutIds = useRef<NodeJS.Timeout[]>([])
+  const isAnimating = useRef(false)
+  const animationFrameId = useRef<number | null>(null)
+  
+  const chars = scrambleChars.split('')
+  
+  const startAnimation = useCallback(() => {
+    if (isAnimating.current) return
+    isAnimating.current = true
+    
+    const startTime = performance.now()
+    const totalDuration = duration * 1000
 
-  const scramble = useCallback(() => {
-    if (isScrambling.current) return
-    isScrambling.current = true
+    const animate = (currentTime: number) => {
+      const elapsed = currentTime - startTime
+      const progress = Math.min(elapsed / totalDuration, 1)
 
-    const chars = scrambleChars.split('')
-    const textArray = originalText.split('')
-    let iteration = 0
-    const totalIterations = Math.floor(duration * 20) // Adjust for duration
+      const scrambled = originalText
+        .split('')
+        .map((char, index) => {
+          if (char === ' ') return ' '
+          
+          // Determine if this character should be revealed
+          const charProgress = (index / originalText.length) * 0.5
+          if (progress > 0.5 + charProgress) {
+            return originalText[index]
+          }
+          
+          return chars[Math.floor(Math.random() * chars.length)]
+        })
+        .join('')
 
-    const interval = setInterval(() => {
-      setDisplayText(
-        textArray
-          .map((char, index) => {
-            if (char === ' ') return ' '
-            if (iteration > (totalIterations / textArray.length) * index) {
-              return originalText[index]
-            }
-            return chars[Math.floor(Math.random() * chars.length)]
-          })
-          .join('')
-      )
+      setDisplayText(scrambled)
 
-      iteration += speed
-
-      if (iteration >= totalIterations) {
-        clearInterval(interval)
+      if (progress < 1) {
+        animationFrameId.current = requestAnimationFrame(animate)
+      } else {
         setDisplayText(originalText)
-        isScrambling.current = false
+        isAnimating.current = false
       }
-    }, 30)
+    }
 
-    return () => clearInterval(interval)
-  }, [originalText, scrambleChars, duration, speed])
+    animationFrameId.current = requestAnimationFrame(animate)
+  }, [originalText, chars, duration])
 
   useEffect(() => {
     const handleMove = (e: PointerEvent) => {
-      if (!rootRef.current) return
+      if (!rootRef.current || isAnimating.current) return
       
-      const { left, top, width, height } = rootRef.current.getBoundingClientRect()
-      const dx = e.clientX - (left + width / 2)
-      const dy = e.clientY - (top + height / 2)
-      const dist = Math.hypot(dx, dy)
+      const rect = rootRef.current.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+      
+      const dist = Math.hypot(e.clientX - centerX, e.clientY - centerY)
 
-      if (dist < radius && !isScrambling.current) {
-        scramble()
+      if (dist < radius) {
+        startAnimation()
       }
     }
 
     window.addEventListener('pointermove', handleMove)
     return () => {
       window.removeEventListener('pointermove', handleMove)
-      timeoutIds.current.forEach(clearTimeout)
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current)
     }
-  }, [radius, scramble])
+  }, [radius, startAnimation])
 
   return (
     <span
       ref={rootRef}
-      className={`inline-block cursor-default select-none ${className}`}
-      style={style}
+      className={`inline-block whitespace-pre transition-colors duration-300 ${className}`}
+      style={{ 
+        ...style,
+        minWidth: `${originalText.length}ch`, // Help maintain layout
+        fontVariantNumeric: 'tabular-nums' // Ensure numbers don't shift
+      }}
     >
       {displayText}
     </span>
