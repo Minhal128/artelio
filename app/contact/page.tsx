@@ -66,9 +66,9 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="relative min-h-screen bg-[#fdfaf3] selection:bg-black selection:text-white">
-      {/* Background Canvas - Anchored to bottom */}
-      <div className="absolute inset-x-0 bottom-0 z-0 h-[60vh] opacity-80 pointer-events-none">
+    <div className="relative min-h-screen bg-[#fdfaf3] selection:bg-black selection:text-white overflow-hidden">
+      {/* Crowd Canvas at bottom */}
+      <div className="absolute inset-x-0 bottom-0 z-0 h-[50vh] opacity-80 pointer-events-none">
         <Skiper39 />
       </div>
 
@@ -79,17 +79,6 @@ export default function ContactPage() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="max-w-7xl mx-auto"
         >
-          {/* Header Section */}
-          <div className="text-center mb-24">
-            <h1 className="text-7xl md:text-9xl font-serif text-black mb-8 tracking-tight">
-              Contact Us
-            </h1>
-            <p className="text-xl md:text-2xl text-black/60 font-serif italic max-w-2xl mx-auto leading-relaxed">
-              Have a question or want to work together? Drop us a message and we'll
-              get back to you shortly.
-            </p>
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Column: Info */}
             <motion.div 
