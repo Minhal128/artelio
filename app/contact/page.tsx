@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Phone, MapPin, Send } from "lucide-react"
 import { Skiper39 } from "@/components/ui/crowd-canvas"
+import { PaymentGateways } from "@/components/payment-gateways"
 
 export default function ContactPage() {
   const containerVariants = {
@@ -33,6 +34,8 @@ export default function ContactPage() {
     <main className="min-h-screen bg-[#f5f1e8] font-sans selection:bg-primary/20">
       <Navbar />
       
+      <PaymentGateways />
+
       <div className="max-w-[1400px] mx-auto px-8 py-20 lg:py-32">
         <motion.div 
           variants={containerVariants}
