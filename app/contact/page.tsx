@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Skiper39 } from "@/components/ui/crowd-canvas";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -228,6 +229,16 @@ export default function ContactPage() {
             </div>
           </motion.div>
         </div>
+      </motion.div>
+
+      {/* Crowd Canvas Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.6, duration: 1 }}
+        className="relative z-10 max-w-5xl mx-auto mt-12"
+      >
+        <Skiper39 />
       </motion.div>
     </div>
   );
