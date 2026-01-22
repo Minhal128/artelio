@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import CurvedLoop from "./ui/CurvedLoop";
+import { Button } from "./ui/button";
 
 const collectionCards = [
   {
@@ -60,12 +61,13 @@ const collectionCards = [
 
 export function Collections() {
   const sectionRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    if (!sectionRef.current) return;
+    if (!sectionRef.current || !containerRef.current) return;
 
     const cards = cardsRef.current.filter((card): card is HTMLDivElement => card !== null);
     const totalCards = cards.length;
@@ -74,10 +76,10 @@ export function Collections() {
     cards.forEach((card, i) => {
       gsap.set(card, {
         zIndex: totalCards - i,
-        scale: 1 - i * 0.04,
-        y: i * 15,
-        rotate: i * -1,
-        opacity: i < 5 ? 1 : 0, // Show more cards in the stack
+        scale: 1 - i * 0.05,
+        y: i * 20,
+        rotate: i * -2,
+        opacity: i < 4 ? 1 : 0,
       });
     });
 
@@ -85,7 +87,7 @@ export function Collections() {
       scrollTrigger: {
         trigger: sectionRef.current,
         start: "top top",
-        end: `+=${window.innerHeight * totalCards * 1.5}`,
+        end: `+=${window.innerHeight * totalCards}`,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
@@ -94,27 +96,27 @@ export function Collections() {
 
     cards.forEach((card, i) => {
       if (i < totalCards - 1) {
-        // Top card moves UP and OUT
+        // Current card moves UP and OUT
         tl.to(card, {
-          y: "-120%",
-          x: "-10%",
+          y: "-130%",
+          scale: 1.1,
+          rotate: -10,
           opacity: 0,
-          rotate: -15,
           duration: 1,
           ease: "power2.inOut",
         }, i);
 
-        // Cards behind move FORWARD to fill the gap
+        // All cards behind shift forward one position in the stack
         cards.slice(i + 1).forEach((nextCard, nextIndex) => {
           tl.to(nextCard, {
-            scale: 1 - nextIndex * 0.04,
-            y: nextIndex * 15,
-            rotate: nextIndex * -1,
-            opacity: nextIndex < 5 ? 1 : 0,
+            scale: 1 - nextIndex * 0.05,
+            y: nextIndex * 20,
+            rotate: nextIndex * -2,
+            opacity: nextIndex < 4 ? 1 : 0,
             duration: 1,
             ease: "power2.inOut",
           }, i);
-        });
+        }, i);
       }
     });
 
@@ -126,54 +128,66 @@ export function Collections() {
   return (
     <section 
       ref={sectionRef} 
-      className="relative h-screen w-full overflow-hidden bg-white flex items-center justify-center p-4 md:p-10"
+      className="relative h-screen w-full overflow-hidden bg-white flex flex-col items-center justify-center p-4 md:p-10"
     >
-      <div className="relative w-full h-full max-h-[600px] max-w-[1200px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex items-center justify-center">
-        
-          {/* Background Decorative Element */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
-             <CurvedLoop 
-                marqueeText="OUR EXCLUSIVE COLLECTIONS ✦ ARTELIO ✦ EST 2026 ✦ CURATED PIECES ✦ "
-                speed={1.5}
-                curveAmount={250}
-                className="text-black/[0.07]"
-              />
-          </div>
-
+      <div 
+        ref={containerRef}
+        className="relative w-full h-[85vh] max-h-[700px] max-w-[1300px] rounded-[48px] overflow-hidden bg-[#DCD7CC] shadow-inner flex flex-col items-center justify-center"
+      >
+        {/* Background Decorative Element */}
+        <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none">
+          <CurvedLoop 
+            marqueeText="OUR EXCLUSIVE COLLECTIONS ✦ ARTELIO ✦ EST 2026 ✦ CURATED PIECES ✦ "
+            speed={1.5}
+            curveAmount={300}
+            className="text-black/[0.08]"
+            interactive={false}
+          />
+        </div>
 
         {/* Cards Container - Centered */}
-        <div className="relative z-10 h-full w-full flex items-center justify-center">
-          <div className="relative w-[70%] sm:w-[60%] md:w-[55%] lg:w-[50%] max-w-[700px] aspect-[1.6] md:aspect-[1.6]">
-              {collectionCards.map((card, i) => (
-                <div 
-                  key={card.id}
-                  ref={(el) => { cardsRef.current[i] = el }}
-                  className="absolute inset-0 h-full w-full rounded-[40px] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] bg-neutral-200"
-                >
-                  <div className="relative h-full w-full group">
-                    <img
-                      src={card.image}
-                      alt={card.title}
-                      className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
-                    
-                    <div className="absolute bottom-12 left-10 right-10 text-white">
-                      <span className="text-[12px] uppercase tracking-[0.6em] font-black mb-4 block opacity-100 text-white/90">
-                        {card.category}
-                      </span>
-                      <h4 className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
-                        {card.title}
-                      </h4>
-                    </div>
+        <div className="relative z-10 w-full flex-1 flex items-center justify-center">
+          <div className="relative w-[85%] sm:w-[70%] md:w-[60%] lg:w-[50%] max-w-[800px] aspect-[1.6]">
+            {collectionCards.map((card, i) => (
+              <div 
+                key={card.id}
+                ref={(el) => { cardsRef.current[i] = el }}
+                className="absolute inset-0 h-full w-full rounded-[40px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.6)] bg-neutral-200"
+              >
+                <div className="relative h-full w-full group">
+                  <img
+                    src={card.image}
+                    alt={card.title}
+                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80" />
+                  
+                  <div className="absolute bottom-10 left-10 right-10 text-white">
+                    <span className="text-[10px] md:text-[12px] uppercase tracking-[0.6em] font-black mb-3 block opacity-100 text-white/90">
+                      {card.category}
+                    </span>
+                    <h4 className="font-serif text-2xl md:text-4xl lg:text-5xl leading-[1.1] tracking-tight">
+                      {card.title}
+                    </h4>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
+        </div>
+
+        {/* View More Button */}
+        <div className="relative z-20 pb-12">
+          <Button 
+            variant="outline" 
+            className="rounded-full px-8 py-6 border-black/20 bg-white/20 backdrop-blur-sm hover:bg-black hover:text-white transition-all duration-300 font-medium tracking-wider"
+          >
+            VIEW ALL COLLECTIONS
+          </Button>
+        </div>
 
         {/* Subtle Background Pattern/Texture */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-multiply bg-[url('https://www.transparenttextures.com/patterns/paper-fibers.png')]" />
       </div>
     </section>
   );

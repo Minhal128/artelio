@@ -30,11 +30,10 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
   const [spacing, setSpacing] = useState(0);
   const [offset, setOffset] = useState(0);
   const uid = useId();
-    const pathId = `curve-${uid}`;
-    const pathD = `M-100,100 Q720,${100 + curveAmount} 1540,100`;
+  const pathId = `curve-${uid}`;
+  const pathD = `M-100,40 Q500,${40 + curveAmount} 1540,40`;
 
-    const dragRef = useRef(false);
-
+  const dragRef = useRef(false);
   const lastXRef = useRef(0);
   const dirRef = useRef<'left' | 'right'>(direction);
   const velRef = useRef(0);
@@ -112,7 +111,7 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
 
   return (
     <div
-      className="absolute inset-0 flex items-center justify-center w-full pointer-events-auto"
+      className="absolute inset-0 flex items-center justify-center w-full"
       style={{ visibility: ready ? 'visible' : 'hidden', cursor: cursorStyle }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -120,8 +119,8 @@ const CurvedLoop: FC<CurvedLoopProps> = ({
       onPointerLeave={endDrag}
     >
       <svg
-        className="select-none w-full overflow-visible block aspect-[1440/500] text-[6rem] font-bold uppercase leading-none"
-        viewBox="0 0 1440 500"
+        className="select-none w-full overflow-visible block aspect-[1440/120] text-[6rem] font-bold uppercase leading-none"
+        viewBox="0 0 1440 120"
       >
         <text ref={measureRef} xmlSpace="preserve" style={{ visibility: 'hidden', opacity: 0, pointerEvents: 'none' }}>
           {text}
