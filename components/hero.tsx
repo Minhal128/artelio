@@ -145,14 +145,14 @@ export function Hero() {
 
 export function LogoMarquee() {
   const items = [
-    { name: "sothebys", logo: "https://logo.clearbit.com/sothebys.com" },
-    { name: "christies", logo: "https://logo.clearbit.com/christies.com" },
-    { name: "moma", logo: "https://logo.clearbit.com/moma.org" },
-    { name: "tate", logo: "https://logo.clearbit.com/tate.org.uk" },
-    { name: "gagosian", logo: "https://logo.clearbit.com/gagosian.com" },
-    { name: "artsy", logo: "https://logo.clearbit.com/artsy.net" },
-    { name: "github", logo: "https://logo.clearbit.com/github.com" },
-    { name: "artnet", logo: "https://logo.clearbit.com/artnet.com" },
+    { name: "sothebys" },
+    { name: "christies" },
+    { name: "moma" },
+    { name: "tate" },
+    { name: "gagosian" },
+    { name: "artsy" },
+    { name: "github" },
+    { name: "artnet" },
   ]
 
   return (
