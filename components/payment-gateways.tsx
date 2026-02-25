@@ -56,18 +56,18 @@ const CharacterV3 = ({
     const x = useTransform(
       progress,
       [0.1, 0.45],
-      [distanceFromCenter * 120, 0],
+      [distanceFromCenter * (window.innerWidth < 768 ? 60 : 120), 0],
     );
     const rotate = useTransform(
       progress,
       [0.1, 0.45],
-      [distanceFromCenter * 60, 0],
+      [distanceFromCenter * (window.innerWidth < 768 ? 30 : 60), 0],
     );
   
     const y = useTransform(
       progress,
       [0.1, 0.45],
-      [-Math.abs(distanceFromCenter) * 30, 0],
+      [-Math.abs(distanceFromCenter) * (window.innerWidth < 768 ? 15 : 30), 0],
     );
     const scale = useTransform(progress, [0.1, 0.45], [0.6, 1]);
     const opacity = useTransform(progress, [0.1, 0.2, 0.45], [0, 1, 1]);
@@ -76,7 +76,7 @@ const CharacterV3 = ({
     <motion.img
       src={char}
       alt="Payment Gateway"
-      className={cn("inline-block h-24 w-auto px-10 object-contain filter drop-shadow-xl", isSpace && "w-4")}
+      className={cn("inline-block h-12 sm:h-16 md:h-20 lg:h-24 w-auto px-4 sm:px-6 md:px-8 lg:px-10 object-contain filter drop-shadow-xl", isSpace && "w-4")}
       style={{
         x,
         rotate,
@@ -131,9 +131,9 @@ export function PaymentGateways() {
 
   return (
     <section className="w-full bg-[#fdfaf3] relative">
-      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[105vh] py-[5vh] overflow-hidden">
+      <div ref={containerRef} className="flex flex-col items-center justify-center min-h-[70vh] md:min-h-[105vh] py-[5vh] overflow-hidden">
         <div
-          className="w-full max-w-6xl text-center text-7xl md:text-9xl font-serif font-medium tracking-tighter text-black sticky top-[35vh]"
+          className="w-full max-w-6xl text-center text-3xl sm:text-4xl md:text-5xl lg:text-7xl xl:text-9xl font-serif font-medium tracking-tighter text-black sticky top-[20vh] md:top-[35vh] px-4"
           style={{ perspective: "1200px" }}
         >
           {characters.map((char, index) => (
@@ -147,23 +147,23 @@ export function PaymentGateways() {
           ))}
         </div>
 
-        <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[20vh] z-10">
+        <div className="w-full max-w-4xl flex flex-col items-center justify-center text-center mt-[10vh] md:mt-[20vh] z-10 px-4">
           <motion.div 
             style={{ 
               opacity: useTransform(smoothProgress, [0.05, 0.25], [0, 0.8]),
               y: useTransform(smoothProgress, [0.05, 0.25], [20, 0])
             }}
-            className="flex items-center justify-center gap-4 mb-12"
+            className="flex items-center justify-center gap-2 md:gap-4 mb-8 md:mb-12"
           >
-            <Bracket className="h-10 text-[#b3633d]" />
-            <span className="font-serif text-3xl font-light text-black/90 italic">
+            <Bracket className="h-6 md:h-10 text-[#b3633d]" />
+            <span className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-black/90 italic">
               Secure & Fast Payments
             </span>
-            <Bracket className="h-10 scale-x-[-1] text-[#b3633d]" />
+            <Bracket className="h-6 md:h-10 scale-x-[-1] text-[#b3633d]" />
           </motion.div>
           
           <div 
-            className="flex items-center justify-center gap-12"
+            className="flex items-center justify-center gap-6 md:gap-12"
             style={{ perspective: "1200px" }}
           >
             {paymentIcons.map((icon, index) => (

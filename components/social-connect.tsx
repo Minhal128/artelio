@@ -102,14 +102,6 @@ export function SocialConnect() {
   const characters = text.split("");
   const centerIndex = Math.floor(characters.length / 2);
 
-  const socialIcons = [
-    "https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023_original.svg",
-    "https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg", // Replacing with Reddit below
-    "https://upload.wikimedia.org/wikipedia/commons/7/71/Discord_Color_Logo.svg",
-  ];
-
-  // Correcting icons to user request: discord, reddit, twitter, linkedin
   const requestedIcons = [
     "https://upload.wikimedia.org/wikipedia/commons/7/71/Discord_Color_Logo.svg",
     "https://upload.wikimedia.org/wikipedia/commons/0/07/Reddit_icon.svg",
@@ -120,13 +112,13 @@ export function SocialConnect() {
   const iconCenterIndex = Math.floor(requestedIcons.length / 2);
 
   return (
-    <section className="w-full bg-[#fdfaf3] py-20">
+    <section className="w-full bg-[#fdfaf3] py-12 md:py-20">
       <div
         ref={targetRef}
-        className="relative box-border flex h-[100vh] items-center justify-center gap-[2vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
+        className="relative box-border flex h-[60vh] md:h-[100vh] items-center justify-center gap-[2vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
       >
         <div
-          className="w-full max-w-6xl text-center text-6xl md:text-8xl font-serif font-medium tracking-tighter text-black"
+          className="w-full max-w-6xl text-center text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-serif font-medium tracking-tighter text-black px-4"
           style={{
             perspective: "1000px",
           }}
@@ -144,17 +136,17 @@ export function SocialConnect() {
       </div>
       <div
         ref={targetRef2}
-        className="relative -mt-[30vh] box-border flex h-[100vh] flex-col items-center justify-center gap-[4vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
+        className="relative -mt-[15vh] md:-mt-[30vh] box-border flex h-[60vh] md:h-[100vh] flex-col items-center justify-center gap-[4vw] overflow-hidden bg-[#fdfaf3] p-[2vw]"
       >
-        <div className="flex items-center justify-center gap-4 mb-8">
-          <Bracket className="h-10 text-[#b3633d]" />
-          <span className="font-serif text-3xl font-light text-black/80 italic">
+        <div className="flex items-center justify-center gap-2 md:gap-4 mb-6 md:mb-8 px-4">
+          <Bracket className="h-6 md:h-10 text-[#b3633d]" />
+          <span className="font-serif text-lg sm:text-xl md:text-2xl lg:text-3xl font-light text-black/80 italic">
             Join Our Community
           </span>
-          <Bracket className="h-10 scale-x-[-1] text-[#b3633d]" />
+          <Bracket className="h-6 md:h-10 scale-x-[-1] text-[#b3633d]" />
         </div>
         <div
-          className="w-full max-w-5xl flex flex-wrap items-center justify-center text-center"
+          className="w-full max-w-5xl flex flex-wrap items-center justify-center text-center px-4"
           style={{
             perspective: "1000px",
           }}

@@ -70,20 +70,20 @@ export function Hero() {
   }
 
   return (
-    <section id="home" className="relative flex flex-col items-center text-center pt-16 pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
+    <section id="home" className="relative flex flex-col items-center text-center pt-8 md:pt-16 pb-8 md:pb-16 px-4 max-w-[1400px] mx-auto overflow-hidden">
       {/* Dynamic Background Accents */}
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
-        className="absolute -top-20 -left-20 w-[500px] h-[500px] bg-primary rounded-full blur-[120px] pointer-events-none"
+        className="absolute -top-10 md:-top-20 -left-10 md:-left-20 w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-primary rounded-full blur-[60px] md:blur-[120px] pointer-events-none"
       />
       <motion.div
         variants={splashVariants}
         initial="hidden"
         animate="visible"
         transition={{ delay: 0.5 }}
-        className="absolute top-1/3 -right-20 w-[600px] h-[600px] bg-primary/40 rounded-full blur-[150px] pointer-events-none"
+        className="absolute top-1/3 -right-10 md:-right-20 w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-primary/40 rounded-full blur-[75px] md:blur-[150px] pointer-events-none"
       />
 
       <motion.div
@@ -95,14 +95,14 @@ export function Hero() {
         {/* Modern Label */}
         <motion.div 
           variants={itemVariants}
-          className="mb-6 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm"
+          className="mb-4 md:mb-6 px-3 md:px-4 py-1 md:py-1.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm"
         >
-          <span className="text-xs font-bold tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
+          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] md:tracking-[0.3em] uppercase text-primary/80">Premium Art Curation</span>
         </motion.div>
 
             <motion.h1 
               variants={itemVariants} 
-              className="mb-6 font-serif text-4xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl text-foreground"
+              className="mb-4 md:mb-6 font-serif text-2xl sm:text-3xl md:text-6xl lg:text-8xl font-medium tracking-tighter leading-tight max-w-5xl text-foreground px-2"
             >
               Defining the Future of Fine Art with{" "}
               <Shuffle
@@ -126,7 +126,7 @@ export function Hero() {
 
           <motion.p
             variants={itemVariants}
-            className="text-black text-base md:text-lg max-w-3xl mb-4 leading-relaxed font-light"
+            className="text-black text-sm sm:text-base md:text-lg max-w-3xl mb-6 md:mb-4 leading-relaxed font-light px-4"
           >
           Where timeless masterpieces meet contemporary vision. Discover high-end art collections curated for the modern connoisseur.
         </motion.p>
@@ -134,7 +134,7 @@ export function Hero() {
         {/* Circular Gallery Integration */}
         <motion.div 
           variants={itemVariants}
-          className="w-full h-[600px] relative mb-16"
+          className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] relative mb-8 md:mb-16"
         >
             <CircularGallery 
               items={galleryItems}
@@ -165,14 +165,14 @@ export function LogoMarquee() {
   ]
 
   return (
-    <div className="w-full relative py-8">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-48 bg-black -rotate-[3deg] z-0 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border-y border-white/10" />
+    <div className="w-full relative py-4 md:py-8">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200vw] h-24 md:h-48 bg-black -rotate-[3deg] z-0 shadow-[0_15px_30px_-7px_rgba(0,0,0,0.5)] md:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)] border-y border-white/10" />
       
-      <div className="relative z-10 overflow-hidden py-12 select-none">
-          <div className="flex items-center gap-32 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
+      <div className="relative z-10 overflow-hidden py-6 md:py-12 select-none">
+          <div className="flex items-center gap-8 md:gap-32 animate-marquee whitespace-nowrap hover:[animation-play-state:paused]">
             {[...items, ...items, ...items].map((item, index) => (
-              <div key={index} className="flex items-center gap-8 group">
-                <span className="text-white/30 font-sans font-bold text-4xl tracking-tighter group-hover:text-white transition-all duration-500 uppercase">
+              <div key={index} className="flex items-center gap-4 md:gap-8 group">
+                <span className="text-white/30 font-sans font-bold text-xl md:text-4xl tracking-tighter group-hover:text-white transition-all duration-500 uppercase">
                   {item.name}
                 </span>
               </div>

@@ -68,25 +68,25 @@ const Gallery = () => {
 
 
   return (
-    <section id="gallery" className="py-24 bg-[#f5f4f3]">
-      <div className="max-w-[1400px] mx-auto px-6">
-        <div className="flex flex-col items-center mb-16 text-center">
+    <section id="gallery" className="py-12 md:py-24 bg-[#f5f4f3]">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+        <div className="flex flex-col items-center mb-8 md:mb-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 mb-4"
+            className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4"
           >
-            <div className="h-[1px] w-8 bg-primary/30" />
-            <span className="text-[11px] font-bold uppercase tracking-[0.5em] text-primary/60">Curated Exhibition</span>
-            <div className="h-[1px] w-8 bg-primary/30" />
+            <div className="h-[1px] w-4 md:w-8 bg-primary/30" />
+            <span className="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.3em] md:tracking-[0.5em] text-primary/60">Curated Exhibition</span>
+            <div className="h-[1px] w-4 md:w-8 bg-primary/30" />
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif text-5xl md:text-7xl tracking-tight mb-6"
+            className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-7xl tracking-tight mb-4 md:mb-6"
           >
             The <span className="italic">Velvet</span> Archive
           </motion.h2>
@@ -95,7 +95,7 @@ const Gallery = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="max-w-xl text-black/50 font-light leading-relaxed mb-12"
+            className="max-w-xl text-black/50 font-light leading-relaxed mb-8 md:mb-12 text-sm md:text-base px-4"
           >
             A meticulous selection of visionary works that challenge perception and celebrate the profound beauty of human expression.
           </motion.p>
@@ -130,24 +130,58 @@ const Carousel_003 = ({
   const css = `
   .Carousal_003 {
     width: 100%;
-    height: 450px;
-    padding-bottom: 50px !important;
+    height: 250px;
+    padding-bottom: 30px !important;
   }
   
+  @media (min-width: 640px) {
+    .Carousal_003 {
+      height: 350px;
+      padding-bottom: 40px !important;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .Carousal_003 {
+      height: 450px;
+      padding-bottom: 50px !important;
+    }
+  }
+  
+  .Carousal_003 .swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 200px;
+    height: 220px;
+  }
+  
+  @media (min-width: 640px) {
     .Carousal_003 .swiper-slide {
-      background-position: center;
-      background-size: cover;
+      width: 280px;
+      height: 320px;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .Carousal_003 .swiper-slide {
       width: 350px;
       height: 400px;
     }
+  }
 
-    .Carousal_003 .swiper-wrapper {
-      transition-timing-function: linear !important;
-    }
+  .Carousal_003 .swiper-wrapper {
+    transition-timing-function: linear !important;
+  }
 
-    .swiper-pagination-bullet {
-
+  .swiper-pagination-bullet {
     background-color: #000 !important;
+  }
+  
+  @media (max-width: 640px) {
+    .Carousal_003 .swiper-slide-shadow-left,
+    .Carousal_003 .swiper-slide-shadow-right {
+      opacity: 0.3;
+    }
   }
 `;
   return (
@@ -185,9 +219,9 @@ const Carousel_003 = ({
           centeredSlides={true}
           loop={loop}
           coverflowEffect={{
-            rotate: 40,
+            rotate: window.innerWidth < 640 ? 20 : 40,
             stretch: 0,
-            depth: 100,
+            depth: window.innerWidth < 640 ? 50 : 100,
             modifier: 1,
             slideShadows: true,
           }}

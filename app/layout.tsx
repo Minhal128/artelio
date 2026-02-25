@@ -11,9 +11,14 @@ const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" })
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" })
 
 export const metadata: Metadata = {
-  title: "v0 App",
-  description: "Created with v0",
+  title: "Artelio - Premier Art Gallery",
+  description: "A premier online art gallery showcasing contemporary and classic art",
   generator: "v0.app",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+  },
   icons: {
     icon: [
       {

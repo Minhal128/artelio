@@ -151,3 +151,85 @@
     @apply bg-background text-foreground;
   }
 }
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  /* Reduce motion for better mobile performance */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  /* Optimize touch targets */
+  button,
+  [role="button"],
+  input[type="submit"],
+  input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improve text readability on mobile */
+  body {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Reduce blur effects on mobile for better performance */
+  .blur-\[120px\] {
+    backdrop-filter: blur(60px);
+  }
+  
+  .blur-\[150px\] {
+    backdrop-filter: blur(75px);
+  }
+
+  /* Mobile-optimized marquee animation */
+  @keyframes marquee-mobile {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee-mobile 20s linear infinite;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablet-specific optimizations */
+  .blur-\[120px\] {
+    backdrop-filter: blur(90px);
+  }
+  
+  .blur-\[150px\] {
+    backdrop-filter: blur(120px);
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Optimize for retina displays */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Dark mode mobile optimizations */
+@media (max-width: 768px) and (prefers-color-scheme: dark) {
+  /* Reduce contrast for better mobile dark mode experience */
+  :root {
+    --primary: oklch(0.6 0.12 45);
+  }
+}
